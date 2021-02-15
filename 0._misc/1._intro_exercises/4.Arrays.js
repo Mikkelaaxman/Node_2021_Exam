@@ -80,10 +80,10 @@ console.log(newArr.toString());
 // Exercise 8 - For loop and if statement
 
 const numbers  = [5, 3, 2, 7, 11, 12, 0, -20, 6];
-const discardedNumbers = [];;
+const discardedNumbers = [];
 
 for (let i= 0; i < numbers.length; i++) {
-    if (numbers[i] > 6 || numbers[i] < 0){
+    if (numbers[i] > 6 || numbers[i] < 0) {
         console.log(numbers[i])
     }
     else

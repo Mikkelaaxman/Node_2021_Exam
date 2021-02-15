@@ -4,13 +4,13 @@
 // Exercise 1 - Retrieve value from object by key
 
 const myObj = {"message": "Hello, earthling! I bring peace."};
-console.log(myObj);
+console.log(myObj.message);
 
 // Log the message 
 
 // --------------------------------------
 // Exercise 2 - Defining an object. 
-const myInfo = {"Age": "23",
+const myInfo = {"Age": 23,
                 "Name": "Victor"};
 
 // Create an object that has your name and age. 
@@ -19,7 +19,9 @@ const myInfo = {"Age": "23",
 // --------------------------------------
 // Exercise 3 - Add a property 
 
-const stackOverflow = {"isAllowed": true};
+const stackOverflow = {};
+stackOverflow.isAllowed = true;
+console.log(stackOverflow.isAllowed);
 
 // make a rule called isAllowed and let the value be true
 
