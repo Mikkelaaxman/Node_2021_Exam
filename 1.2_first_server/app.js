@@ -15,15 +15,23 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 app.get("/time", (req, res) => {
   const time = date.getTime();
   const realDate = new Date(time);
-  res.send(realDate.toString());
+  res.send({ time: realDate.toString() });
 });
 
 app.get("/day", (req, res) => {
-  res.send(dateList[date.getDay()]);
+  res.send({ day: dateList[date.getDay()] });
 });
 
 app.get("/month", (req, res) => {
-  res.send(monthNames[date.getMonth()]);
+  res.send({ month: monthNames[date.getMonth()] });
+});
+
+app.get("/about", (req, res) => {
+  res.send({ version: "1.0.0 " });
+});
+
+app.get("/page", (req, res) => {
+  res.send("<h1>Welcome<h1>");
 });
 
 app.listen(8080);
