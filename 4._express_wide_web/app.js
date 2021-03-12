@@ -3,12 +3,30 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send({});
+  res.sendFile(__dirname + "/public/welcome.html");
 });
 
-app.listen(8080, (error) => {
+app.get("/pizza", (req, res) => {
+  res.sendFile(__dirname + "/public/pizza.html");
+});
+
+app.get("/whiskey", (req, res) => {
+  res.send({ barkeep: "here ya go" });
+});
+
+app.get("/bar", (req, res) => {
+  if(Number(req.query.money) > 500 ) {
+    res.redirect("/whiskey");
+  } else {
+    res.send({doorman: "no money pal"})
+  }
+});
+
+const port = process.env.port || 8080;
+
+app.listen(port, (error) => {
   if (error) {
     console.log(error);
   }
-  console.log("Server is running on port:", 8080);
+  console.log("Server is running on port:", Number(port));
 });
