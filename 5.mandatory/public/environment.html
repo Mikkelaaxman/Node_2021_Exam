@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,55 +8,59 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel=stylesheet href="assets/prism.css">
 </head>
+
 <body>
-<nav class="nav" id="naver">
-    <div class="nav-left">
-        <a href="/index" class="nav-item">
+    <nav class="nav" id="naver">
+        <div class="nav-left">
+            <a href="/index" class="nav-item">
                 <span class="icon">
                   <i class="fa fa-code"></i>
                 </span>
-        </a>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <h1 class="title is-4">
+                Welcome to my assigment
+            </h1>
+        </div>
+
+
+        <div class="nav-right nav-menu">
+            <a href="basic" class="nav-item">The basics</a>
+            <a href="node" class="nav-item">Node & NPM</a>
+            <a href="express" class="nav-item">Express</a>
+            <a href="environment" class="nav-item">Environment</a>
+        </div>
+
+        <br>
+    </nav>
+
+    <div class="container">
+        <p>
+            enviroment variables are, just like the name suggest, variables that are global to the your enviroment. as an example if you want to look at the enviorment variable for your port you can simply write
+            <code class="language-javascript">process.env.port</code> that will output the environt variable PORT
+        </p>
+        <br>
+        <p>
+            another thing that has something to do with enviroment is the package <i>cross-env</i> cross-env allows us to run our scripts from package.json in all platforms simply write <code class="language-bash">cross-env</code> before your script and
+            make sure you have the package installed
+        </p>
+        <br>
     </div>
 
-    <div class="nav-center">
-        <h1 class="title is-4">
-            Welcome to my assigment
-        </h1>
-    </div>
-
-
-    <div class="nav-right nav-menu">
-        <a href="basic" class="nav-item">The basics</a>
-        <a href="node" class="nav-item">Node & NPM</a>
-        <a href="express" class="nav-item">Express</a>
-        <a href="environment" class="nav-item">Environment</a>
-        <a href="about" class="nav-item">See more</a>
-    </div>
-
-    <br>
-</nav>
-
-<div class="container">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis nisl et libero malesuada maximus et congue arcu. Morbi id enim euismod, volutpat felis vitae, vestibulum justo. Fusce scelerisque ultricies augue eu venenatis. Pellentesque eros risus, laoreet ut congue eu, cursus id orci. Ut risus magna, vestibulum nec urna non, fermentum vestibulum justo. Pellentesque ornare odio a semper venenatis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sed tortor suscipit, vulputate nunc quis, tincidunt purus. Suspendisse a mollis turpis.
-    </p>
-    <br>
-    <p>
-        <code>
-            this is some code
-        </code>
-    </p>
-</div>
-
-<footer id="footer">
-    <h1>
-        <i>
+    <footer id="footer">
+        <h1>
+            <i>
             No copyright, enjoy
         </i>
-        <i class="fa fa-smile-o"></i>
-    </h1>
-</footer>
+            <i class="fa fa-smile-o"></i>
+        </h1>
+    </footer>
+    <script src="assets/prism.js"></script>
 
 </body>
+
 </html>

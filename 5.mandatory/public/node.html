@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,49 +8,59 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel=stylesheet href="assets/prism.css">
 </head>
+
 <body>
-<nav class="nav" id="naver">
-    <div class="nav-left">
-        <a href="/index" class="nav-item">
+    <nav class="nav" id="naver">
+        <div class="nav-left">
+            <a href="/index" class="nav-item">
                 <span class="icon">
                   <i class="fa fa-code"></i>
                 </span>
-        </a>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <h1 class="title is-4">
+                Welcome to my assigment
+            </h1>
+        </div>
+
+
+        <div class="nav-right nav-menu">
+            <a href="basic" class="nav-item">The basics</a>
+            <a href="node" class="nav-item">Node & NPM</a>
+            <a href="express" class="nav-item">Express</a>
+            <a href="environment" class="nav-item">Environment</a>
+        </div>
+
+        <br>
+    </nav>
+
+    <div class="container">
+        <p>
+            <i>Node.js</i> is a back-end javascript runtime enviroment that allows us to execute javascript code outside the browser to check if you have node correctly installed simply open a terminal and type
+            <code class="language-bash">node -v</code> if it outputs a number you done it right
+        </p>
+        <br>
+        <p>
+            npm also known as node package manager, is a package manager for javascript npm is also the default package manager for node.js you can check if you have node installed simply open a terminal and type
+            <code class="language-bash">npm -v</code> if it outputs a number you done it right npm consist of a client, and a large database of packages you can create a <i>package.json</i> by running the init command:
+            <code class="language-bash">npm init</code>
+        </p>
     </div>
 
-    <div class="nav-center">
-        <h1 class="title is-4">
-            Welcome to my assigment
-        </h1>
-    </div>
-
-
-    <div class="nav-right nav-menu">
-        <a href="basic" class="nav-item">The basics</a>
-        <a href="node" class="nav-item">Node & NPM</a>
-        <a href="express" class="nav-item">Express</a>
-        <a href="environment" class="nav-item">Environment</a>
-        <a href="about" class="nav-item">See more</a>
-    </div>
-
-    <br>
-</nav>
-
-<div class="container">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis nisl et libero malesuada maximus et congue arcu. Morbi id enim euismod, volutpat felis vitae, vestibulum justo. Fusce scelerisque ultricies augue eu venenatis. Pellentesque eros risus, laoreet ut congue eu, cursus id orci. Ut risus magna, vestibulum nec urna non, fermentum vestibulum justo. Pellentesque ornare odio a semper venenatis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sed tortor suscipit, vulputate nunc quis, tincidunt purus. Suspendisse a mollis turpis.
-    </p>
-</div>
-
-<footer id="footer">
-    <h1>
-        <i>
+    <footer id="footer">
+        <h1>
+            <i>
             No copyright, enjoy
         </i>
-        <i class="fa fa-smile-o"></i>
-    </h1>
-</footer>
+            <i class="fa fa-smile-o"></i>
+        </h1>
+    </footer>
+    <script src="assets/prism.js"></script>
 
 </body>
+
 </html>

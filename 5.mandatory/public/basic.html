@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,50 +8,123 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel=stylesheet href="assets/prism.css">
 </head>
+
 <body>
-<nav class="nav" id="naver">
-    <div class="nav-left">
-        <a href="/index" class="nav-item">
+    <nav class="nav" id="naver">
+        <div class="nav-left">
+            <a href="/index" class="nav-item">
                 <span class="icon">
                   <i class="fa fa-code"></i>
                 </span>
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="nav-center">
-        <h1 class="title is-4">
-            Welcome to my assigment
+        <div class="nav-center">
+            <h1 class="title is-4">
+                Welcome to my assigment
+            </h1>
+        </div>
+
+
+        <div class="nav-right nav-menu">
+            <a href="basic" class="nav-item">The basics</a>
+            <a href="node" class="nav-item">Node & NPM</a>
+            <a href="express" class="nav-item">Express</a>
+            <a href="environment" class="nav-item">Environment</a>
+        </div>
+
+        <br>
+    </nav>
+
+    <div class="container">
+        <br>
+        <h1>
+            Click on the boxes to expand
         </h1>
+        <br>
+
+
+        <button type="button" class="collapsible">Variables</button>
+        <div class="content">
+            <p>
+                Variables are like little data containers, we can declare a variable in <i>javascript</i> by writing:
+                <br>
+                <code class="language-javascript">let myVar = 1</code>
+            </p>
+        </div>
+
+
+
+        <button type="button" class="collapsible">Loops</button>
+        <div class="content">
+            <p>
+                We can define loops in <i>javascript</i> by writing:
+                <br>
+                <code class="language-javascript">
+                const failures = ["misclick", "falling", "tiktok fail"];
+            </code>
+                <br>
+                <br>
+                <p>
+                    and then iterate over the loop like this:
+                </p>
+                <code class="language-javascript">
+                failures.map((fail, index) => {
+                console.log(fail, index);
+            </code>
+                <br>
+                <code class="language-javascript">
+                });
+            </code>
+            </p>
+        </div>
+
+        <button type="button" class="collapsible">Objects</button>
+        <div class="content">
+            <p>
+                We can define a object in <i>javascript</i> like this:
+                <br>
+                <code class="language-bash">
+                const myObject = {
+                attribute: "value"
+                };
+
+            </code>
+            </p>
+        </div>
+
+
+
+        <button type="button" class="collapsible">Functions</button>
+        <div class="content">
+            <p>We can define a function in <i>javascript</i> like this:
+                <br>
+                <code class="language-javascript">
+                const sayHi = () => {
+                console.log("hi")
+                };
+            </code>
+            </p>
+            </p>
+        </div>
+
+
+
     </div>
 
-
-    <div class="nav-right nav-menu">
-        <a href="basic" class="nav-item">The basics</a>
-        <a href="node" class="nav-item">Node & NPM</a>
-        <a href="express" class="nav-item">Express</a>
-        <a href="environment" class="nav-item">Environment</a>
-        <a href="about" class="nav-item">See more</a>
-    </div>
-
-    <br>
-</nav>
-
-<div class="container">
-    <p>variables</p>
-    <p>loops</p>
-    <p>functions</p>
-    <p>objects</p>
-</div>
-
-<footer id="footer">
-    <h1>
-        <i>
+    <footer id="footer">
+        <h1>
+            <i>
             No copyright, enjoy
         </i>
-        <i class="fa fa-smile-o"></i>
-    </h1>
-</footer>
+            <i class="fa fa-smile-o"></i>
+        </h1>
+    </footer>
+    <script src="assets/prism.js"></script>
+    <script src="assets/behave.js"></script>
 
 </body>
+
 </html>

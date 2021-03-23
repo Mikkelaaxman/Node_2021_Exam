@@ -9,7 +9,7 @@ function sayHiLater(anyFunction) {
 
 const sayHi = () => {
     console.log("hi")
-}
+};
 sayHiLater(sayHi)
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,70 +8,66 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel=stylesheet href="assets/prism.css">
 </head>
+
 <body>
-<nav class="nav" id="naver">
-    <div class="nav-left">
-        <a href="index" class="nav-item">
+    <nav class="nav" id="naver">
+        <div class="nav-left">
+            <a href="index" class="nav-item">
                 <span class="icon">
                   <i class="fa fa-code"></i>
                 </span>
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="nav-center">
-        <h1 class="title is-4">
-            Welcome to my assigment
-        </h1>
-    </div>
+        <div class="nav-center">
+            <h1 class="title is-4">
+                Welcome to my assigment
+            </h1>
+        </div>
 
 
-    <div class="nav-right nav-menu">
-        <a href="basic" class="nav-item">The basics</a>
-        <a href="node" class="nav-item">Node & NPM</a>
-        <a href="express" class="nav-item">Express</a>
-        <a href="environment" class="nav-item">Environment</a>
-        <a href="about" class="nav-item">See more</a>
-    </div>
+        <div class="nav-right nav-menu">
+            <a href="basic" class="nav-item">The basics</a>
+            <a href="node" class="nav-item">Node & NPM</a>
+            <a href="express" class="nav-item">Express</a>
+            <a href="environment" class="nav-item">Environment</a>
+        </div>
 
-    <br>
-</nav>
-
-<div class="container">
-    <p>
-        In this course, we have ( so far ) been focusin on the minimal web-framework <i>Express</i>.
-        This framework helps us build and serve rest api's, among other things.
-        We can install <i>Express</i> by navigating to our <i>package.json</i> and then in the terminal writing
-        <code>npm install express</code> and then installing with <code>npm i</code>
-        In out <i>app.js</i> file we can import <i>Express</i> with the following line of code
-        <code>const express = require("express");</code> and then instanciate it with
-        <code>const app = express();</code>
-        now that we have express in our <i>app.js</i> lets use it,
-        a simple way of doing this is just by listen on port 8080, we can do this like so <code>app.listen(8080);</code>
-        But when we go to <code>localhost:8080</code> it dosent show us anything usefull, lets fix that with the
-        following lines of code
         <br>
-        <code>
+    </nav>
+
+    <div class="container">
+        <p>
+            In this course, we have ( so far ) been focusin on the minimal web-framework <i>Express</i>. This framework helps us build and serve rest api's, among other things. We can install <i>Express</i> by navigating to our <i>package.json</i> and
+            then in the terminal writing
+            <code class="language-bash">npm install express</code> and then installing with <code class="language-bash">npm i</code> In out <i>app.js</i> file we can import <i>Express</i> with the following line of code
+            <code class="language-javascript">const express = require("express");</code> and then instanciate it with
+            <code>const app = express();</code> now that we have express in our <i>app.js</i> lets use it, a simple way of doing this is just by listen on port 8080, we can do this like so <code>app.listen(8080);</code> But when we go to <code class="language-bash">localhost:8080</code>            it dosent show us anything usefull, lets fix that with the following lines of code
+            <br>
+            <code class="language-javascript">
             app.get("/", (req, res) => {
             <br>
             res.send({});
             <br>
             });
             <br>
-        </code>
-        congratz you have now sent a empty json and completed this crash course on express
-    </p>
+        </code> congratz you have now sent a empty json and completed this crash course on express
+        </p>
 
-</div>
+    </div>
 
-<footer id="footer">
-    <h1>
-        <i>
+    <footer id="footer">
+        <h1>
+            <i>
             No copyright, enjoy
         </i>
-        <i class="fa fa-smile-o"></i>
-    </h1>
-</footer>
+            <i class="fa fa-smile-o"></i>
+        </h1>
+    </footer>
 
+    <script src="assets/prism.js"></script>
 </body>
+
 </html>
