@@ -11,7 +11,7 @@
 <body>
 <nav class="nav" id="naver">
     <div class="nav-left">
-        <a href="" class="nav-item">
+        <a href="index" class="nav-item">
                 <span class="icon">
                   <i class="fa fa-code"></i>
                 </span>
@@ -38,14 +38,29 @@
 
 <div class="container">
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis nisl et libero malesuada maximus et congue arcu. Morbi id enim euismod, volutpat felis vitae, vestibulum justo. Fusce scelerisque ultricies augue eu venenatis. Pellentesque eros risus, laoreet ut congue eu, cursus id orci. Ut risus magna, vestibulum nec urna non, fermentum vestibulum justo. Pellentesque ornare odio a semper venenatis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sed tortor suscipit, vulputate nunc quis, tincidunt purus. Suspendisse a mollis turpis.
-    </p>
-    <br>
-    <p>
+        In this course, we have ( so far ) been focusin on the minimal web-framework <i>Express</i>.
+        This framework helps us build and serve rest api's, among other things.
+        We can install <i>Express</i> by navigating to our <i>package.json</i> and then in the terminal writing
+        <code>npm install express</code> and then installing with <code>npm i</code>
+        In out <i>app.js</i> file we can import <i>Express</i> with the following line of code
+        <code>const express = require("express");</code> and then instanciate it with
+        <code>const app = express();</code>
+        now that we have express in our <i>app.js</i> lets use it,
+        a simple way of doing this is just by listen on port 8080, we can do this like so <code>app.listen(8080);</code>
+        But when we go to <code>localhost:8080</code> it dosent show us anything usefull, lets fix that with the
+        following lines of code
+        <br>
         <code>
-            this is some code
+            app.get("/", (req, res) => {
+            <br>
+            res.send({});
+            <br>
+            });
+            <br>
         </code>
+        congratz you have now sent a empty json and completed this crash course on express
     </p>
+
 </div>
 
 <footer id="footer">

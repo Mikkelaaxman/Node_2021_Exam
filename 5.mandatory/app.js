@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static("public"));
 
 // eslint-disable-next-line no-unused-vars
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 });
 
@@ -20,9 +20,7 @@ app.get("/express", (req, res) => {
 app.get("/environment", (req, res) => {
   res.sendFile(`${__dirname}/public/environment.html`);
 });
-app.get("/about", (req, res) => {
-  res.sendFile(`${__dirname}/public/about.html`);
-});
+
 app.get("/basic", (req, res) => {
   res.sendFile(`${__dirname}/public/basic.html`);
 });
