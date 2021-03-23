@@ -40,20 +40,36 @@
 
     <div class="container">
         <p>
-            In this course, we have ( so far ) been focusin on the minimal web-framework <i>Express</i>. This framework helps us build and serve rest api's, among other things. We can install <i>Express</i> by navigating to our <i>package.json</i> and
-            then in the terminal writing
-            <code class="language-bash">npm install express</code> and then installing with <code class="language-bash">npm i</code> In out <i>app.js</i> file we can import <i>Express</i> with the following line of code
-            <code class="language-javascript">const express = require("express");</code> and then instanciate it with
-            <code>const app = express();</code> now that we have express in our <i>app.js</i> lets use it, a simple way of doing this is just by listen on port 8080, we can do this like so <code>app.listen(8080);</code> But when we go to <code class="language-bash">localhost:8080</code>            it dosent show us anything usefull, lets fix that with the following lines of code
+            In this course, we have ( so far ) been focusin on the minimal web-framework <i>Express</i>. This framework helps us build and serve rest api's, among other things. We can install <i>Express</i> by navigating to our
+            <i>package.json</i> and then in the terminal writing:
+            <br>
+            <code class="language-bash">npm install express</code>
+            <br>
+            <br> and then installing with:
+            <br>
+            <code class="language-bash">npm i</code>
+            <br>
+            <br> In out <i>app.js</i> file we can import <i>Express</i> with the following line of code:
+            <br>
+            <code class="language-javascript">const express = require("express");</code>
+            <br>
+            <br> and then instantiate it with:
+            <br>
+            <code class="language-javascript">const app = express();</code>
+            <br>
+            <br> now that we have express in our <i>app.js</i> lets use it, a simple way of doing this is just by listen on port 8080, we can do this like so
+            <br>
+            <code class="language-javascript">app.listen(8080);</code>
+            <br> But when we go to <code class="language-bash">localhost:8080</code> it dosent show us anything usefull, lets fix that with the following lines of code
             <br>
             <code class="language-javascript">
             app.get("/", (req, res) => {
-            <br>
             res.send({});
+        </code>
             <br>
-            });
+            <code class="language-javascript"> });</code>
             <br>
-        </code> congratz you have now sent a empty json and completed this crash course on express
+            <br> Congratz! You have now sent a empty json and completed this crash course on express!
         </p>
 
     </div>
