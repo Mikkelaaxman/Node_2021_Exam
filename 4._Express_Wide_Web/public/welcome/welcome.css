@@ -1,0 +1,10 @@
+body {
+    background-color: pink;
+}
+    
+.pizza-space {
+    width: 100vw;
+    height: 100px;
+    background-color: grey;
+    border: 1px solid black;
+}

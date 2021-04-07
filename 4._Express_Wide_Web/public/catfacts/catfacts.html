@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat facts</title>
+</head>
+<body>
+    
+    <h1>Cat fact</h1>
+    <div id="cat-fact"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // call /pub with fetch
+        fetch("/pub?money=1000")
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+        });
+
+/*         function getCatFact() {
+            $.get(`https://cat-fact.herokuapp.com/facts/random?amount=500`, (response) => {
+            
+            const catFactDiv = document.getElementById("cat-fact");
+            response.map(fact => {
+                if (fact.status.verified) {
+                    const nestedListItem = document.createElement("li");
+                    nestedListItem.innerText = fact.text;
+                    
+                    catFactDiv.append(nestedListItem);
+                }
+            })
+
+        });
+        }
+        getCatFact(); */
+
+        // convert the Ajax call to a fetch using Promises and in the end show the fact on the page
+
+/*         fetch("https://cat-fact.herokuapp.com/facts/random")
+        .then(response => response.json())
+        .then(result => {
+            const catFactDiv = document.getElementById("cat-fact");
+            catFactDiv.innerText = result.text;
+        }); */
+
+        (async function () {
+            const response = await fetch("https://cat-fact.herokuapp.com/facts/random");
+            const result = await response.json();
+            const catFactDiv = document.getElementById("cat-fact");
+            catFactDiv.innerText = result.text;
+        })()
+
+
+        // convert the fetch to cat facts to async await
+
+    </script>
+</body>
+</html>
