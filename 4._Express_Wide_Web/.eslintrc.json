@@ -13,7 +13,7 @@
     },
     "rules": {
 		"no-console": "off",
-        "linebreak-style": ["error", "unix"],
+        "linebreak-style": ["error", "windows"],
 		"indent": ["error", 4],
         "semi": ["error", "always"],
         "quotes": ["error", "double"]

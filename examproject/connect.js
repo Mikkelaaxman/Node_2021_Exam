@@ -1,20 +1,25 @@
-//create the client class
-const { MongoClient } = require("mongodb")
-    //const MongoClient = require("mongodb").MongoClient
+const { MongoClient } = require("mongodb");
+// Connection URI
 
-const uri = "mongodb://localhost:27017"
-connect();
-async function connect() {
-    const client = new MongoClient(uri);
+const uri = "mongodb://127.0.0.1:27017/?compressors=zlib&gssapiServiceName=mongodb";
+
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+async function run() {
     try {
-        await client.connect({ useNewUrlParser: true });
-        const db = client.db("wine");
-        console.log(`Connected to database ${db.databaseName}`)
-
-    } catch (ex) {
-        console.error(`Something bad happend ${ex}`)
+        // Connect the client to the server
+        await client.connect();
+        // Establish and verify connection
+        await client.db("exam");
+        console.log("Connected successfully to server");
     } finally {
-        client.close();
+        // Ensures that the client will close when you finish/error
+        await client.close();
     }
-
 }
+
+
+
+run().catch(console.dir);
