@@ -1,6 +1,5 @@
-/* eslint-disable consistent-return */
-/* eslint-disable eol-last */
 const express = require("express");
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -14,6 +13,11 @@ app.get("/pizza", (req, res) => {
     res.sendFile(`${__dirname}/public/pizzaparlor.html`);
 });
 
+app.get("/proxy", (req, res) => {
+    fetch("https://www.google.com")
+        .then(res => res.textConverted())
+        .then(body => res.send(body));
+});
 app.get("/whiskey", (req, res) => {
     res.send({ barkeep: "Here ya go, pal. A whiskey for you." });
 });
