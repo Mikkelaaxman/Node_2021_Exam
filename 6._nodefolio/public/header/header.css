@@ -1,11 +1,3 @@
-#nav-logo {
-    width: 60px;
-}
-
-#nav-right-menu {
-    float: right;
-}
-
 #main-content {
     min-height: calc(100vh - 120px);   
 }

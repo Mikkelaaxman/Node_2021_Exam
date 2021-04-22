@@ -3,22 +3,54 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/header/header.css">
-    <link rel="stylesheet" href="/footer/footer.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="header.css">
     <title>Nodefolio</title>
 </head>
 
 <body>
-    <nav>
-        <a href="/"><img id="nav-logo" src="https://cdn.iconscout.com/icon/free/png-512/node-js-1174925.png"></a>
-
-        <div id="nav-right-menu">
-            <a href="/projects">Projects</a>
-            <a href="/contact">Contact</a>
-            <a href="/skills">skills</a>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+        <a href="/" class="navbar-brand">Welcome</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--TODO Set hver link (li) til active (class="nav-item active" når man har klikket på det-->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/skills" class="nav-link">Skills</a>
+                </li>
+            </ul>
         </div>
+        <!--TODO Tilføj din egen github-->
+        <a href="https://github.com/Mikkelaaxman/Node_KEA_2021" class="navbar-brand">
+            <img src="/resources/GitHub-Mark-Light-32px.png" width="30" height="30" alt="">
+            My Github
+        </a>
     </nav>
 
-    <div id="main-content">
+    <!--TODO Forbind til main content?-->
+    <div id="main-content"> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</body>
+
+</html>
