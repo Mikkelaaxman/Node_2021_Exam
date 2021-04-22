@@ -17,15 +17,27 @@ const router = require("express").Router();
 
 
 const projects = [{
-    title: "Nodefolio",
-    description: "Personal portfolio implemented in Node.js",
-    startDate: new Date("2021-04-08"),
-    endDate: new Date("2021-04-15"),
-    gitLink: "https://github.com/anderslatif/Kea_DAT_Node_2021_SPRING.git/2/5._Nodefolio"
-}, {
-    title: "new project",
-    description: "This is the newest thing that I'm sinking my time into"
-}];
+        title: "Mandatory 1",
+        description: "What we have learned implemented in Node.js",
+        startDate: new Date("2021"),
+        endDate: new Date("2021"),
+        gitLink: "https://github.com/victorwp288/kea_node/tree/main/5.mandatory"
+    },
+    {
+        title: "Mandatory 2",
+        description: "Personal portfolio implemented in Node.js",
+        startDate: new Date("2021"),
+        endDate: new Date("2021"),
+        gitLink: "https://github.com/victorwp288/kea_node/tree/main/6._nodefolio"
+    },
+    {
+        title: "Express wide web",
+        description: "Diffrent technics implemented in Node.js",
+        startDate: new Date("2021"),
+        endDate: new Date("2021"),
+        gitLink: "https://github.com/victorwp288/kea_node/tree/main/4._Express_Wide_Web"
+    }
+];
 
 router.get("/api/projects", (req, res) => {
     res.send({ projects });

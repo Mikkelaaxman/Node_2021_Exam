@@ -25,7 +25,7 @@ app.get("/basic", (req, res) => {
     res.sendFile(`${__dirname}/public/basic.html`);
 });
 
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 app.listen(port, (error) => {
     if (error) {
