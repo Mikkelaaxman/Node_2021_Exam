@@ -20,14 +20,14 @@ const frontPage = fs.readFileSync(__dirname + "/public/frontpage/frontpage.html"
 const projectsPage = fs.readFileSync(__dirname + "/public/projects/projects.html", "utf-8");
 const contactPage = fs.readFileSync(__dirname + "/public/contact/contact.html", "utf-8");
 const skillsPage = fs.readFileSync(__dirname + "/public/skills/skills.html", "utf-8");
-
+const toast = fs.readFileSync(__dirname + "/public/toast/toast.html", "utf-8");
 
 app.get("/", (req, res) => {
-    res.send(header + frontPage + footer);
+    res.send(header + frontPage + footer + toast);
 });
 
 app.get("/projects", (req, res) => {
-    res.send(header + projectsPage + footer);
+    res.send(header + projectsPage + footer + toast);
 });
 
 app.get("/contact", (req, res) => {
