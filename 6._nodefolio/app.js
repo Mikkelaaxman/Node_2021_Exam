@@ -1,9 +1,11 @@
 const express = require("express");
+const bodyParser = ("body-parser")
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 const projectsRouter = require("./routes/projects.js");
 const contactRouter = require("./routes/contact.js");
@@ -37,6 +39,7 @@ app.get("/contact", (req, res) => {
 app.get("/skills", (req, res) => {
     res.send(header + skillsPage + footer);
 });
+
 
 const server = app.listen(process.env.PORT || 8080, (error) => {
     if (error) {
