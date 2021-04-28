@@ -1,9 +1,10 @@
 "use strict";
+const { urlencoded } = require("body-parser");
 const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 
-async function main() {
+async function main(emailAdress) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -18,11 +19,10 @@ async function main() {
             pass: testAccount.pass, // generated ethereal password
         },
     });
-    const email = req.body.email
-        // send mail with defined transport object
+    // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: email, // list of receivers
+        to: emailAdress, // list of receivers
         subject: "Hello ✔", // Subject line
         text: "Hello world?", // plain text body
         html: "<b>Hello world?</b>", // html body
@@ -37,8 +37,8 @@ async function main() {
 
 
 router.post("/api/contact", (req, res) => {
-    console.log(req.body)
-    main().catch(console.error);
+    console.log(req.body.email)
+    main(req.body.email).catch(console.error);
     res.redirect("/")
 });
 
