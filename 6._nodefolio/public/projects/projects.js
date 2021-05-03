@@ -6,7 +6,7 @@
         const result = await response.json();
 
         const projectsDiv = document.getElementById("projects");
-        
+
         result.projects.map(project => {
             const projectDiv = document.createElement("div");
 
@@ -18,19 +18,17 @@
             descriptionP.classList.add("project-description");
             descriptionP.innerText = project.description;
 
+            const link = document.createElement("i");
+            link.classList.add("project-gitLink");
+            link.innerText = project.gitLink;
+
+
             projectDiv.appendChild(titleHeader);
             projectDiv.appendChild(descriptionP);
             projectsDiv.appendChild(projectDiv);
+            projectDiv.appendChild(link);
         });
-
-        /* 
-        show the result on the page...  
-        do it in a scalable way that works even if you add new projects 
-        */
-
-
     } catch (error) {
         console.log(error);
     }
 })();
-
