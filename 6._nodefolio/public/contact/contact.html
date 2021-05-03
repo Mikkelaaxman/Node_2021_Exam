@@ -19,18 +19,21 @@
     <br>
     <textarea name="message" placeholder="I like your site " rows="10 " cols="40 "></textarea>
     <br>
-    <button type="submit" id="submitBt">Contact Me!</button>
+    <button type="submit" id="submitBtn">Contact Me!</button>
 </form>
-    <button type="button" id="submitBtn" class="btn btn-primary">Toast test!</button>
 
 <!-- Flexbox container for aligning the toasts -->
 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
-    style="min-height: 200px;">
-    <div id="emailToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
+    style="min-height: 200px; position: fixed;  bottom: 0;
+  right: 0;">
+    <div id="emailToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
         <div class="toast-header">
-            <strong class="me-auto">Email</strong>
-            <small>just now</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+
+    <strong class="mr-auto">Success</strong>
+    <small></small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
         </div>
         <div class="toast-body">
             Email Send!
