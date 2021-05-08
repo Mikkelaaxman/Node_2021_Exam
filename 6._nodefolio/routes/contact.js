@@ -38,7 +38,6 @@ async function main(emailAdress) {
 router.post("/api/contact", (req, res) => {
     console.log(req.body.email)
     main(req.body.email).catch(console.error);
-    res.redirect("/")
 });
 
 module.exports = {

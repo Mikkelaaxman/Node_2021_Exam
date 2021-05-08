@@ -18,7 +18,7 @@
             descriptionP.classList.add("project-description");
             descriptionP.innerText = project.description;
 
-            const link = document.createElement("i");
+            const link = document.createElement("li");
             link.classList.add("project-gitLink");
             link.innerText = project.gitLink;
 
