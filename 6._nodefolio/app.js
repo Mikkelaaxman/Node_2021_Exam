@@ -9,9 +9,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const projectsRouter = require("./routes/projects.js");
 const contactRouter = require("./routes/contact.js");
+const skillsRouter = require("./routes/skills.js");
+
 
 app.use(projectsRouter.router);
 app.use(contactRouter.router);
+app.use(skillsRouter.router);
+
 
 const fs = require("fs");
 
