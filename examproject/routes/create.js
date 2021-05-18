@@ -11,7 +11,15 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
     const db = client.db(dbName);
     const wine = db.collection("wine");
 
-    wine.insertOne({ name: "Gary Oldman" }, (error, result) => {
+
+    let insert = {
+        type: req.body.type,
+        year: req.body.year,
+        name: req.body.name,
+        country: req.body.country
+    }
+
+    wine.insertOne({ insert }, (error, result) => {
         if (error) {
             throw new Error(error);
         }

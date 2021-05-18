@@ -12,7 +12,7 @@ app.get("/wines", (req, res) => {
     res.sendFile(`${__dirname}/public/wines.html`);
 });
 
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 app.listen(port, (error) => {
     if (error) {

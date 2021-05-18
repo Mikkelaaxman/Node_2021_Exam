@@ -10,7 +10,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
     const db = client.db(dbName);
     const wine = db.collection("wine");
 
-    wine.find({ type: "red" }).toArray((error, data) => {
+    wine.find({ type: "white" }).toArray((error, data) => {
         console.log(data);
         client.close();
     });
