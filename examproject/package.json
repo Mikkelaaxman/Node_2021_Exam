@@ -26,7 +26,8 @@
     "dependencies": {
         "express": "^4.17.1",
         "fetch": "^1.1.0",
-        "mongodb": "^3.6.6"
+        "mongodb": "^3.6.6",
+        "nodemailer": "^6.6.0"
     },
     "devDependencies": {
         "cross-env": "^7.0.3"
