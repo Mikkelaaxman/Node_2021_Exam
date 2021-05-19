@@ -35,10 +35,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
 
 router.post("/api/createWine", (req, res) => {
     console.log(req.body.email)
-    main(req.body.email).catch(console.error);
-    setTimeout(() => {
-        res.redirect("/");
-    }, (2 * 1000))
 });
 
 module.exports = {
