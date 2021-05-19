@@ -1,4 +1,8 @@
 const MongoClient = require("mongodb").MongoClient;
+
+const { urlencoded } = require("body-parser");
+const router = require("express").Router();
+
 const url = "mongodb://localhost:27017";
 const dbName = "beverages";
 
@@ -28,3 +32,15 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         client.close();
     });
 });
+
+router.post("/api/createWine", (req, res) => {
+    console.log(req.body.email)
+    main(req.body.email).catch(console.error);
+    setTimeout(() => {
+        res.redirect("/");
+    }, (2 * 1000))
+});
+
+module.exports = {
+    router
+};
