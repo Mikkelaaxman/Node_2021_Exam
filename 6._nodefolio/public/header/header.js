@@ -1,6 +1,8 @@
-/* $(window).load(function () {
+/* 
+Wanted to make nav tabs active on click but it didnt work
+$(window).load(function () {
     var checkvalue = window.location.pathname;
-    //alert(checkvalue);
+    console.log(checkvalue);
     $("a").each(function () {
         if ($(this).attr('href') == checkvalue) { $(this).addClass("active"); }
     });
