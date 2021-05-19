@@ -8,8 +8,8 @@ app.get("/", (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-app.get("/wines", (req, res) => {
-    res.sendFile(`${__dirname}/public/wines.html`);
+app.get("/my_wines", (req, res) => {
+    res.sendFile(`${__dirname}/public/my_wines.html`);
 });
 
 const port = process.env.PORT || 8080;
