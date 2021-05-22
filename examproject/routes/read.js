@@ -6,7 +6,7 @@ const router = require("express").Router();
 const url = "mongodb://localhost:27017";
 const dbName = "beverages";
 
-router.post("/api/read", (req, res) => {
+router.get("/api/read", (req, res) => {
     MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;
