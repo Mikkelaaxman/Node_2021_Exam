@@ -21,14 +21,9 @@ router.get("/api/read", (req, res) => {
             }
             console.log(data);
             client.close();
-            res.send({ data: foundWines })
+            res.send({ foundWines })
         });
     });
-});
-
-
-router.get('/database/get', (req, res) => {
-    res.sendFile(`${__dirname}/public/see_wines.html`);
 });
 
 module.exports = {
