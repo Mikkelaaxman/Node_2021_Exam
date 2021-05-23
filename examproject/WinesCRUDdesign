@@ -1,0 +1,14 @@
+HTTP methods in this order: GET, POST, PUT/PATCH, DELETE
+
+GET /wine         Retrieve all wines (Returns a collection of objects)
+GET /wine/id      Retrieve one wines (path variable with :id in express)
+
+POST /wine        Create one-or-more wines (Client send a json object to create a new entry in table. Server handles ID)
+(POST /wine/id     Create wine and give it specific ID (Rarely used))
+
+(Patch /wine       Update all wines)
+PATCH /wine/id    Updates single entry with part of the resource
+(PUT /wine/id     would replace the entire entry)
+
+DELETE /wine/id   Deletes one entry with id
+(DELETE /wine     would delete or truncate all resources) 
