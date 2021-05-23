@@ -26,6 +26,25 @@ router.get("/api/read", (req, res) => {
     });
 });
 
+
+MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
+    if (error) {
+        throw new Error(error);
+    }
+
+    const db = client.db(dbName);
+    const wine = db.collection("wine");
+
+    wine.find().toArray((error, data) => {
+        if (error) {
+            throw new Error(error);
+        }
+        console.log(data);
+        client.close();
+    });
+});
+
+
 router.get('/database/get', (req, res) => {
     res.sendFile(`${__dirname}/public/see_wines.html`);
 });

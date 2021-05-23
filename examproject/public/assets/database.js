@@ -4,12 +4,10 @@ function getUploads() {
         .then(json => {
             console.log(json.data[0].person)
             for (let i = 0; i < 2; i++) {
-                const person = json.data[i].person;
-                $('#database').append('<li>' + person + '</li>')
+                const wine = json.data[i].wine;
+                document.getElementById("database").append("<li>" + wine + "<li>")
             }
         })
 }
 
 getUploads();
-
-$('database').append('<li>Hejsa</li>')
