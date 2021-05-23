@@ -12,6 +12,10 @@ app.get("/my_wines", (req, res) => {
     res.sendFile(`${__dirname}/public/my_wines.html`);
 });
 
+app.get("/see_wine", (req, res) => {
+    res.sendFile(`${__dirname}/public/see_wine.html`);
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, (error) => {

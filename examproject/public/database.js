@@ -1,5 +1,5 @@
 function getUploads() {
-    fetch('/database')
+    fetch('/see_wine')
         .then(result => result.json())
         .then(json => {
             console.log(json.data[0].person)
