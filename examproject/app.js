@@ -79,20 +79,42 @@ app.post("/api/create_wine", (req, res) => {
 });
 
 
-app.patch("/wine/:id", function(req, res) {
-    let updateObject = req.body; // {last_name : "smith", age: 44}
-    let id = req.params.id;
-    db.users.update({ _id: ObjectId(id) }, { $set: updateObject });
+app.patch("/wine/:name", function(req, res) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
+        if (error) {
+            throw error;
+        }
+
+        const db = client.db(dbName);
+        const wine = db.collection("wine");
+        var myquery = { name: "whitecliff" };
+        var newvalues = {
+            $set: {
+                type: "red",
+                year: 2020,
+                name: qs2,
+                country: "astralia"
+            }
+        };
+
+        wine.updateOne(myquery, newvalues);
+        client.close();
+    });
 });
 
-app.delete("/wine/:id", (req, res) => {
-    db.collection('items').remove({ _id: mongodb.ObjectID(req.params.id) }, (err, result) => {
-        if (err) return console.log(err)
-        console.log(req.body)
-        res.redirect('/')
-    })
-})
+app.delete("/wine/:name", (req, res) => {
+    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
+        if (error) {
+            throw error;
+        }
 
+        const db = client.db(dbName);
+        const wine = db.collection("wine");
+
+        wine.remove({ name: req.params.name })
+        client.close();
+    });
+});
 
 const port = process.env.PORT || 8080;
 
