@@ -59,14 +59,12 @@ app.post("/api/create_wine", (req, res) => {
         const wine = db.collection("wine");
 
 
-        let insert = {
+        wine.insertOne({
             type: req.body.type,
             year: req.body.year,
             name: req.body.name,
             country: req.body.country
-        }
-
-        wine.insertOne({ wine: insert }, (error, result) => {
+        }, (error, result) => {
             if (error) {
                 throw new Error(error);
             }
@@ -102,7 +100,7 @@ app.patch("/wine/:name", function(req, res) {
     });
 });
 
-app.delete("/wine/:name", (req, res) => {
+app.delete("/wine/:id", (req, res) => {
     MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;
@@ -110,9 +108,17 @@ app.delete("/wine/:name", (req, res) => {
 
         const db = client.db(dbName);
         const wine = db.collection("wine");
+        let id = req.params.id;
 
-        wine.remove({ name: req.params.name })
+        wine.deleteOne({ _id: new MongoClient.ObjectId(id) }, function(err, results) {});
+        //wine.deleteOne({ _id: req.params.id })
+
+        res.json({ success: id })
         client.close();
+
+
+
+
     });
 });
 
