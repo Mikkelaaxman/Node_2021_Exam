@@ -21,11 +21,11 @@ app.get("/create", (req, res) => {
 });
 
 app.get("/view", (req, res) => {
-    res.sendFile(`${__dirname}/public/my_wines.html`);
+    res.sendFile(`${__dirname}/public/wines.html`);
 });
 
 app.get("/all", (req, res) => {
-    res.sendFile(`${__dirname}/public/see_wine.html`);
+    res.sendFile(`${__dirname}/public/wine.html`);
 });
 
 app.get("/api/see_wine", (req, res) => {

@@ -6,7 +6,11 @@ function getUploads() {
             for (let i = 0; i < 4; i++) {
                 const wine = json.foundWines[i];
                 document.getElementById("database").append(wine.name +
-                    " made in " + wine.country + ", " + wine.year)
+                    " made in " + wine.country + ", " + wine.year);
+                let x = document.createElement("br");
+                document.getElementById("database").appendChild(x);
+
+
             }
         }).catch(error => (console.log(error)));
 }
