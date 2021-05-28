@@ -7,13 +7,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-
 const readRouter = require("./routes/read.js");
 const postRouter = require("./routes/post.js");
+const patchRouter = require("./routes/patch");
+const deleteRouter = require("./routes/delete.js");
 
 
 app.use(readRouter.router);
 app.use(postRouter.router);
+app.use(deleteRouter.router);
+app.use(patchRouter.router);
 
 
 
@@ -34,52 +37,6 @@ app.get("/view", (req, res) => {
 
 app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/wine.html`);
-});
-
-
-app.patch("/wine/:name", function(req, res) {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw error;
-        }
-
-        const db = client.db(dbName);
-        const wine = db.collection("wine");
-        var myquery = { name: "whitecliff" };
-        var newvalues = {
-            $set: {
-                type: "red",
-                year: 2020,
-                name: qs2,
-                country: "astralia"
-            }
-        };
-
-        wine.updateOne(myquery, newvalues);
-        client.close();
-    });
-});
-
-app.delete("/wine/:id", (req, res) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw error;
-        }
-
-        const db = client.db(dbName);
-        const wine = db.collection("wine");
-        let id = req.params.id;
-
-        wine.deleteOne({ _id: new MongoClient.ObjectId(id) }, function(err, results) {});
-        //wine.deleteOne({ _id: req.params.id })
-
-        res.json({ success: id })
-        client.close();
-
-
-
-
-    });
 });
 
 const port = process.env.PORT || 8080;
