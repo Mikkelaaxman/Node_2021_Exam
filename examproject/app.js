@@ -25,7 +25,7 @@ app.get("/view", (req, res) => {
 });
 
 app.get("/all", (req, res) => {
-    res.sendFile(`${__dirname}/public/see_wine.html`);
+    res.sendFile(`${__dirname}/public/wines.html`);
 });
 
 app.get("/api/see_wine", (req, res) => {
