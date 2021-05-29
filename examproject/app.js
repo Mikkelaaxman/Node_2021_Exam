@@ -1,13 +1,24 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const bodyParser = require('body-parser');
+const bodyParser = ("body-parser")
 
 const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+const readRouter = require("./routes/read.js");
+const postRouter = require("./routes/post.js");
+const patchRouter = require("./routes/patch");
+const deleteRouter = require("./routes/delete.js");
+
+
+app.use(readRouter.router);
+app.use(postRouter.router);
+app.use(deleteRouter.router);
+app.use(patchRouter.router);
+
+
 
 const url = "mongodb://localhost:27017";
 const dbName = "beverages"
@@ -21,99 +32,15 @@ app.get("/create", (req, res) => {
 });
 
 app.get("/view", (req, res) => {
-    res.sendFile(`${__dirname}/public/my_wines.html`);
+    res.sendFile(`${__dirname}/public/wine.html`);
 });
 
 app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/wines.html`);
 });
 
-app.get("/api/see_wine", (req, res) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw error;
-        }
-
-        const db = client.db(dbName);
-        const wine = db.collection("wine");
-
-        wine.find().toArray((error, foundWines) => {
-            if (error) {
-                throw error;
-            }
-            console.log(foundWines);
-            client.close();
-            res.send({ foundWines })
-        });
-    });
-});
-
-
-app.post("/api/create_wine", (req, res) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw new Error(error);
-        }
-
-        const db = client.db(dbName);
-        const wine = db.collection("wine");
-
-
-        let insert = {
-            type: req.body.type,
-            year: req.body.year,
-            name: req.body.name,
-            country: req.body.country
-        }
-
-        wine.insertOne({ wine: insert }, (error, result) => {
-            if (error) {
-                throw new Error(error);
-            }
-
-            console.log(result);
-            client.close();
-        });
-        res.redirect("/")
-    });
-});
-
-
-app.patch("/wine/:name", function(req, res) {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw error;
-        }
-
-        const db = client.db(dbName);
-        const wine = db.collection("wine");
-        var myquery = { name: "whitecliff" };
-        var newvalues = {
-            $set: {
-                type: "red",
-                year: 2020,
-                name: qs2,
-                country: "astralia"
-            }
-        };
-
-        wine.updateOne(myquery, newvalues);
-        client.close();
-    });
-});
-
-app.delete("/wine/:name", (req, res) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw error;
-        }
-
-        const db = client.db(dbName);
-        const wine = db.collection("wine");
-
-        wine.remove({ name: req.params.name })
-        client.close();
-    });
+app.get("/socket", (req, res) => {
+    res.sendFile(`${__dirname}/public/sockettest.html`);
 });
 
 const port = process.env.PORT || 8080;

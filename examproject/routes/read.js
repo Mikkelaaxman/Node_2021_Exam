@@ -1,12 +1,10 @@
+const router = require("express").Router();
 const MongoClient = require("mongodb").MongoClient;
 
-const { urlencoded } = require("body-parser");
-const router = require("express").Router();
-
 const url = "mongodb://localhost:27017";
-const dbName = "beverages";
+const dbName = "beverages"
 
-router.get("/api/getwine", (req, res) => {
+router.get("/api/see_wine", (req, res) => {
     MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;

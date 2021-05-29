@@ -1,25 +1,33 @@
+const router = require("express").Router();
 const MongoClient = require("mongodb").MongoClient;
 
-const { urlencoded } = require("body-parser");
-const router = require("express").Router();
-
 const url = "mongodb://localhost:27017";
-const dbName = "beverages";
+const dbName = "beverages"
 
 
-MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-    if (error) {
-        throw new Error(error);
-    }
-
-    const db = client.db(dbName);
-    const wine = db.collection("wine");
-
-    wine.updateOne({ type: "white" }, { type: "red" }), ((error, data) => {
+router.patch("/wine/:name", function(req, res) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         if (error) {
-            throw new Error(error);
+            throw error;
         }
-        console.log(data);
+
+        const db = client.db(dbName);
+        const wine = db.collection("wine");
+        var myquery = { name: "whitecliff" };
+        var newvalues = {
+            $set: {
+                type: "red",
+                year: 2020,
+                name: qs2,
+                country: "astralia"
+            }
+        };
+
+        wine.updateOne(myquery, newvalues);
         client.close();
     });
 });
+
+module.exports = {
+    router
+};
