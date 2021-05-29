@@ -5,7 +5,7 @@ const url = "mongodb://localhost:27017";
 const dbName = "beverages"
 
 
-app.patch("/wine/:name", function(req, res) {
+router.patch("/wine/:name", function(req, res) {
     MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;

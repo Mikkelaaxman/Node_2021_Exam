@@ -39,6 +39,10 @@ app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/wine.html`);
 });
 
+app.get("/socket", (req, res) => {
+    res.sendFile(`${__dirname}/public/sockettest.html`);
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, (error) => {
