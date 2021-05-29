@@ -11,39 +11,22 @@
 </head>
 
 <body>
-    <nav class="nav" id="naver">
-        <div class="nav-left">
-            <a href="/index" class="nav-item">
-                <span class="icon">
-                  <i class="fa fa-code"></i>
-                </span>
-            </a>
-        </div>
-
-        <div class="nav-center">
-            <h1 class="title is-4">
-                Welcome to my assigment
-            </h1>
-        </div>
-
-        <br>
-    </nav>
 
 
     <form method="POST" action="/api/create_wine">
         <label>Type</label>
-        <input name="type" placeholder="red">
+        <input name="type" autofocus required placeholder="red">
         <br>
         <label>Year</label>
-        <input name="year" placeholder="2019">
+        <input name="year" type="number" placeholder="2019">
         <br>
         <label>Name</label>
-        <input name="name" placeholder="qs2">
+        <input name="name" required placeholder="name">
         <br>
         <label>Country</label>
-        <input name="country" placeholder="Australia">
+        <input name="country" required placeholder="Australia">
         <br>
-        <button type="submit" id="submitBtn">Contact Me!</button>
+        <button type="submit" id="submitBtn">Create Wine</button>
     </form>
 
 
