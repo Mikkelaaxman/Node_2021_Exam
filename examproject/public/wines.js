@@ -7,18 +7,18 @@
 async function getWines() {
     const response = await fetch("/api/see_wine")
 
-/*         .then(result => result.json())
-        .then(json => {
-
-            for (let i = 0; i < Object.keys(json.foundWines).length; i++) {
-                dataSet.push(json.foundWines[i]);
-                console.log("Inside async "+ dataSet[i]);
-            }
-            return dataSet;
-        }) */
-        if(!response.ok){
-            throw new Error("An error has occured: " + response.text)
-        }
+    /*         .then(result => result.json())
+            .then(json => {
+    
+                for (let i = 0; i < Object.keys(json.foundWines).length; i++) {
+                    dataSet.push(json.foundWines[i]);
+                    console.log("Inside async "+ dataSet[i]);
+                }
+                return dataSet;
+            }) */
+    if (!response.ok) {
+        throw new Error("An error has occured: " + response.text)
+    }
     const dataSet = await response.json();
     return dataSet;
 
@@ -26,40 +26,41 @@ async function getWines() {
 
 
 function editWine(wine) {
-
+    
     console.log("EDIT WINE CALLED WITH " + wine._id)
 }
 
 $(document).ready(function () {
-  
-    
+
+
     //console.log(dataSet[0]);
 
-/*    DOESNT WORK
-     console.log("Now creating table beginning with " + dataSet[0].name)
-    $("#wineTable").DataTable({
-        data: dataSet, //Should just be dataset but gets error with missing row 0? 
-        columns: [
-            { title: "_id" },
-            { title: "type" },
-            { title: "year" },
-            { title: "name" },
-            { title: "country" },
-        ]
-    }); */
-   
+    /*    DOESNT WORK
+         console.log("Now creating table beginning with " + dataSet[0].name)
+        $("#wineTable").DataTable({
+            data: dataSet, //Should just be dataset but gets error with missing row 0? 
+            columns: [
+                { title: "_id" },
+                { title: "type" },
+                { title: "year" },
+                { title: "name" },
+                { title: "country" },
+            ]
+        }); */
+
     var table = document.getElementById("wineTable");
 
-    getWines().then(dataSet =>{
+    getWines().then(dataSet => {
 
         dataSet;
+
         console.log(dataSet.foundWines);
 
         for (let i = 0; i < dataSet.foundWines.length; i++) {
 
             // Create an empty <tr> element and add it to the 1st position of the table:
-            var row = table.insertRow(i + 1); //+1 because header is 0
-
+            var row = table.insertRow(i); //+1 because header is 0
+            
             // Insert new cells (<td> elements) at the the "new" <tr> element:
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
@@ -74,27 +75,30 @@ $(document).ready(function () {
             cell3.innerHTML = wine.type;
             cell4.innerHTML = wine.year;
 
-            cell5.innerHTML = '<button id="editBtn" type="button" class="btn  btn-primary">Edit</button>';
-
-            btn = document.getElementById("editBtn");
-            btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine);
-    
+            var btn = document.createElement('input');
+            btn.type = "button";
+            btn.className = "btn btn-primary";
+            btn.value = "Edit"
+            
+            cell5.appendChild(btn);
+            btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine); 
         }
-        }).catch(error => {
+
+    }).catch(error => {
         error.message;
     });
 
 
-/*      Proper way to do it, but cant appendChild to cell 
-        var btn = document.createElement('input');
-        btn.type = "button";
-        btn.className = "btn";
-        btn.value = dataSet[i]._id;
-       // btn.onclick = (function (value) { return function () { editWine(dataset); } })(entry);
+    /*      Proper way to do it, but cant appendChild to cell 
+            var btn = document.createElement('input');
+            btn.type = "button";
+            btn.className = "btn";
+            btn.value = dataSet[i]._id;
+           // btn.onclick = (function (value) { return function () { editWine(dataset); } })(entry);
+    
+            cell5.appendChild(btn); */
 
-        cell5.appendChild(btn); */
-    
-    
+
 });
 
 
