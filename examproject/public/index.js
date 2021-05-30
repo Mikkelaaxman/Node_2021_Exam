@@ -5,7 +5,7 @@ function getUploads() {
             console.log(json)
 
 
-            let card = document.getElementById("card").cloneNode(true);
+            const card = document.getElementById("card").cloneNode(true);
             
             for (let i = 0; i < Object.keys(json.foundWines).length; i++) {
                 const wine = json.foundWines[i];
