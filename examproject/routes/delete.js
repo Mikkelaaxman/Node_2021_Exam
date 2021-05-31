@@ -15,11 +15,14 @@ router.delete("/wine/:id", (req, res) => {
         const wine = db.collection("wine");
         let id = req.params.id;
 
-        wine.deleteOne({ _id: new MongoClient.ObjectId(id) }, function(err, results) {});
+        wine.deleteOne({ _id: new MongoClient.ObjectId(id) }, function(err, results) {
+            if (err) {
+                throw new Error(err)
+            }
+            client.close();
+        });
         //wine.deleteOne({ _id: req.params.id })
-
-        res.json({ success: id })
-        client.close();
+        res.redirect("/")
 
     });
 });

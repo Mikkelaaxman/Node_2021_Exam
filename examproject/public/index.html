@@ -11,14 +11,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </head>
 
@@ -38,15 +33,36 @@
                 <li class="nav-item">
                     <a href="/all" class="nav-link">All wines</a>
                 </li>
-                <li class="nav-item">
-                    <a href="/socket" class="nav-link">Sockets test</a>
-                </li>
             </ul>
         </div>
         <a href="https://github.com/victorwp288/kea_node/tree/main/examproject" class="navbar-brand">
             <img src="/resources/GitHub-Mark-Light-32px.png" width="30" height="30" alt=""> See on Github
         </a>
     </nav>
+
+
+    <input id="color-picker" type="color">
+    <button onclick="sendColor()">Send color</button>
+
+    <div id="choosen-color"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        function sendColor() {
+            const color = document.getElementById("color-picker").value
+
+            socket.emit("colorChanged", {
+                color
+            });
+        }
+
+        socket.on("changeBackgroundToThisColor", (data) => {
+            document.body.style.backgroundColor = data.color;
+            document.getElementById("choosen-color").innerText = data.color;
+        });
+    </script>
 
     <!--Cards-->
     <div class="container">
@@ -62,7 +78,7 @@
             <!-- Section: Text -->
             <section class="mb-4">
                 <p>
-                    This webpage was designed as an examproject for elective Node.js spring 2021. 
+                    This webpage was designed as an examproject for elective Node.js spring 2021.
                 </p>
 
             </section>
@@ -75,8 +91,7 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2020 Copyright:
-                            <p><a class="text-white" href="https://github.com/mikkelaaxman">Mikkel W. Åxman, mikk990a@stud.kea.dk</a>
-                            And <a class="text-white" href="https://github.com/victorwp288">Victor W. Petersen, @stud.kea.dk</a></p>
+            <p><a class="text-white" href="https://github.com/mikkelaaxman">Mikkel W. Åxman, mikk990a@stud.kea.dk</a> And <a class="text-white" href="https://github.com/victorwp288">Victor W. Petersen, vict2361@stud.kea.dk</a></p>
         </div>
         <!-- Copyright -->
     </footer>
