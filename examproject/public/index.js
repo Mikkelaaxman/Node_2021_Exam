@@ -24,7 +24,7 @@ function getUploads() {
                 title.innerHTML = wine.name;
                 let p = document.createElement("p")
                 p.className = "card-text"
-                p.innerHTML = "Type: " + wine.type + ", Price: " + wine.price;
+                p.innerHTML = "Country of origin: " + wine.country + ", Price: " + wine.price;
                 let image = document.createElement("img")
                 image.className = "img-thumbnail"
                 image.src = wine.imageURL;

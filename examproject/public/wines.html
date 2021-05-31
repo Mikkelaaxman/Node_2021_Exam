@@ -18,6 +18,34 @@
 </head>
 
 <body>
+    <!-- Header -->
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+        <a href="/" class="navbar-brand">Home</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--TODO Set hver link (li) til active (class="nav-item active" når man har klikket på det-->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a href="/create" class="nav-link">Add Wine</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/all" class="nav-link">All wines</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/socket" class="nav-link">Sockets test</a>
+                </li>
+            </ul>
+        </div>
+        <a href="https://github.com/victorwp288/kea_node/tree/main/examproject" class="navbar-brand">
+            <img src="/resources/GitHub-Mark-Light-32px.png" width="30" height="30" alt=""> See on Github
+        </a>
+    </nav>
+    <!-- /Header -->
+
+    <!-- Wine Table -->
+    <h5>All Wines</h5>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="thead-dark">
