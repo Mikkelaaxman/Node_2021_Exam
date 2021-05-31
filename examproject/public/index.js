@@ -58,7 +58,7 @@ function getUploads() {
         }).catch(error => (console.log(error)));
 }
 function editWine(wine) {
-    window.location.href = "/create";
+    window.location.href = "/edit/" + wine._id;
     console.log("EDIT WINE CALLED WITH " + wine._id)
 }
 

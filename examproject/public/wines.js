@@ -3,7 +3,7 @@
     { "_id": "60b2b12fcc9f7f4518a97592", "type": "Red", "year": "2019", "name": "Hardcoded Zin", "country": "USA, California" }
 ];
  */
-//doesnt work 
+
 async function getWines() {
     const response = await fetch("/api/see_wine")
 
@@ -26,6 +26,7 @@ async function getWines() {
 
 
 function editWine(wine) {
+    window.location.href = "/edit/" + wine._id;
 
     console.log("EDIT WINE CALLED WITH " + wine._id)
 }

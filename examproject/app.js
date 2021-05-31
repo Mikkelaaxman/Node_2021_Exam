@@ -48,7 +48,7 @@ app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/wines.html`);
 });
 
-app.get("/edit", (req, res) => {
+app.get("/edit/:id", (req, res) => {
     res.sendFile(`${__dirname}/public/edit.html`);
 });
 
