@@ -52,28 +52,43 @@
 
     <form method="POST" action="/api/edit">
         <label>Type</label>
-        <input name="type" autofocus required placeholder="red">
+        <input name="type" id="type" autofocus required placeholder="type">
         <br>
         <label>Year</label>
-        <input name="year" type="number" required placeholder="2019">
+        <input name="year" id="year" type="number" required placeholder="2021">
         <br>
         <label>Name</label>
-        <input name="name" required placeholder="name">
+        <input name="name" id="name" required placeholder="name">
         <br>
         <label>Country</label>
-        <input name="country" required placeholder="Australia">
+        <input name="country" id="country" required placeholder="country">
         <br>
         <label>Price</label>
-        <input name="price" type="number" required placeholder="100">
+        <input name="price" id="price" type="number" required placeholder="100">
         <br>
         <label>Image Link</label>
-        <input name="imageURL" type="url" placeholder="">
+        <input name="imageURL" id="imageURL" type="url" placeholder="">
         <br>
-        <input hidden name="_id">
+        <input hidden name="_id" id="_id">
         <button type="submit" class="button btn-primary" id="submitBtn">Edit</button>
-        <button class="button btn-danger" id="deleteBtn" >Delete</button>
+        <button class="button btn-danger" id="deleteBtn" onclick="deleteWine()" >Delete</button>
     </form>
 
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+        title="Close Modal">&times;</span>
+    <form class="modal-content" action="/action_page.php">
+        <div class="container">
+            <h1>Delete Wine</h1>
+            <p>Are you sure you want to delete this wine?</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="button" class="deletebtn">Delete</button>
+            </div>
+        </div>
+    </form>
+</div>
 
     <footer id="footer" class="bg-light text-center text-lg-start">
         <div id="footer-copyright"></div>

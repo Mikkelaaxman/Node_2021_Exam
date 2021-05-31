@@ -16,7 +16,7 @@ app.use(express.static("public"));
 
 const readRouter = require("./routes/read.js");
 const postRouter = require("./routes/post.js");
-const patchRouter = require("./routes/patch");
+const patchRouter = require("./routes/patch.js");
 const deleteRouter = require("./routes/delete.js");
 const singleRouter = require("./routes/readSingle.js");
 
