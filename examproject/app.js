@@ -48,6 +48,10 @@ app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/wines.html`);
 });
 
+app.get("/edit", (req, res) => {
+    res.sendFile(`${__dirname}/public/edit.html`);
+});
+
 
 
 io.on("connection", (socket) => {
