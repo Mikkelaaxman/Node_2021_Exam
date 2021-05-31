@@ -10,8 +10,6 @@ const io = require("socket.io")(server);
 
 const escapeHtml = require("html-escaper").escape;
 
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
