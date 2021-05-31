@@ -20,14 +20,16 @@ const readRouter = require("./routes/read.js");
 const postRouter = require("./routes/post.js");
 const patchRouter = require("./routes/patch");
 const deleteRouter = require("./routes/delete.js");
+const singleRouter = require("./routes/readSingle.js");
+
 
 
 app.use(readRouter.router);
 app.use(postRouter.router);
 app.use(deleteRouter.router);
 app.use(patchRouter.router);
+app.use(singleRouter.router);
 
-var counter = 0; //Initial counter value 
 
 const url = "mongodb://localhost:27017";
 const dbName = "beverages"
