@@ -26,9 +26,14 @@ async function getWines() {
 
 
 function editWine(wine) {
-    
+
     console.log("EDIT WINE CALLED WITH " + wine._id)
 }
+function likeWine(wine) {
+
+    console.log("LIKE wine called with id: " + wine._id)
+}
+
 
 $(document).ready(function () {
 
@@ -59,14 +64,16 @@ $(document).ready(function () {
         for (let i = 0; i < dataSet.foundWines.length; i++) {
 
             // Create an empty <tr> element and add it to the 1st position of the table:
-            var row = table.insertRow(i); //+1 because header is 0
+            let row = table.insertRow(i); //+1 because header is 0
             
             // Insert new cells (<td> elements) at the the "new" <tr> element:
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+            let cell4 = row.insertCell(3);
+            let cell5 = row.insertCell(4);
+            let cell6 = row.insertCell(5);
+            let cell7 = row.insertCell(6);
 
             wine = dataSet.foundWines[i];
             // Add some text to the new cells:
@@ -74,13 +81,20 @@ $(document).ready(function () {
             cell2.innerHTML = wine.country;
             cell3.innerHTML = wine.type;
             cell4.innerHTML = wine.year;
+            cell5.innerHTML = wine.price;
+
+            var likebtn = document.createElement('input');
+            likebtn.type = "button";
+            likebtn.className = "btn btn-success";
+            likebtn.value = "Like!"
+            cell6.appendChild(likebtn);
+            likebtn.onclick = (function (wine) { return function () { likeWine(wine); } })(wine);
 
             var btn = document.createElement('input');
             btn.type = "button";
             btn.className = "btn btn-primary";
             btn.value = "Edit"
-            
-            cell5.appendChild(btn);
+            cell7.appendChild(btn);
             btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine); 
         }
 
