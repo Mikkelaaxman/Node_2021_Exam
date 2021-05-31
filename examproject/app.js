@@ -48,9 +48,6 @@ app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/wines.html`);
 });
 
-app.get("/socket", (req, res) => {
-    res.sendFile(`${__dirname}/public/sockettest.html`);
-});
 
 
 io.on("connection", (socket) => {
