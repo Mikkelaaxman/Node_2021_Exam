@@ -41,9 +41,9 @@ $(document).ready(function () {
         
 
 });
-/* 
-async function editWine(){
-document.addEventListener("submit", (e) => {
+
+//Changing default behaviour of FORM here, but doesnt work yet. 
+/* document.addEventListener("submit", (e) => {
     // Store reference to form to make later code easier to read
     const form = e.target;
 
@@ -52,7 +52,7 @@ document.addEventListener("submit", (e) => {
         method: form.method,
         body: new FormData(form),
     })
-    console.log("FORM BODY ID" + form.body._id)
+    
         // We turn the response into text as we expect HTML
         .then((res) => res.text())
 
@@ -90,7 +90,7 @@ document.addEventListener("submit", (e) => {
     // Prevent the default form submit
     e.preventDefault();
 });
-} */
+ */
 
 async function getWine(id) {
     const response = await fetch("/api/see_wine/" + id)
@@ -101,10 +101,6 @@ async function getWine(id) {
     return wine;
 
 }
-
-
-
-
 
 async function deleteWine(id) {
     //document.getElementById('id01').style.display = 'block'

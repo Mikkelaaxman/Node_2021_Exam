@@ -5,7 +5,6 @@ const methodOverride = require('method-override');
 
 const app = express();
 
-
 const server = require("http").createServer(app);
 
 const io = require("socket.io")(server);
@@ -15,15 +14,13 @@ const escapeHtml = require("html-escaper").escape;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method')); //We need this to change html form method to work with PATCH
 
 const readRouter = require("./routes/read.js");
 const postRouter = require("./routes/post.js");
 const patchRouter = require("./routes/patch.js");
 const deleteRouter = require("./routes/delete.js");
 const singleRouter = require("./routes/readSingle.js");
-
-
 
 app.use(readRouter.router);
 app.use(postRouter.router);
