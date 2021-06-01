@@ -50,7 +50,7 @@
     <!-- /Header -->
     <button class="button btn-primary" onclick="goBack()">Go Back</button>
 
-    <form method="POST" action="/api/edit">
+    <form method="POST" action="/api/edit?_method=PATCH">
         <label>Type</label>
         <input name="type" id="type" autofocus required placeholder="type">
         <br>
@@ -70,9 +70,10 @@
         <input name="imageURL" id="imageURL" type="url" placeholder="">
         <br>
         <input hidden name="_id" id="_id">
+        <p role="alert" hidden>Connection failure, please try again.</p>
         <button type="submit" class="button btn-primary" id="submitBtn">Edit</button>
         <button type="button" class="button btn-danger" id="deleteBtn" onclick="deleteWine(_id.value)" >Delete</button>
-
+        
     </form>
 
 <div id="id01" class="modal">

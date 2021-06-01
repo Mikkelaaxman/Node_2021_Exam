@@ -1,6 +1,8 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const bodyParser = ("body-parser")
+const methodOverride = require('method-override');
+
 const app = express();
 
 
@@ -13,6 +15,7 @@ const escapeHtml = require("html-escaper").escape;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(methodOverride('_method'));
 
 const readRouter = require("./routes/read.js");
 const postRouter = require("./routes/post.js");
