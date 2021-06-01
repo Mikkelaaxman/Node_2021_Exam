@@ -29,8 +29,8 @@ app.use(patchRouter.router);
 app.use(singleRouter.router);
 
 
-const url = "mongodb://localhost:27017";
-const dbName = "beverages"
+/* const url = "mongodb://localhost:27017";
+const dbName = "beverages" */
 
 app.get("/", (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);

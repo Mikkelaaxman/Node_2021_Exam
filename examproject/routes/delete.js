@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 
 const url = "mongodb://localhost:27017";
 const dbName = "beverages"
 
 
-router.delete("/wine/:id", (req, res) => {
+router.delete("/api/wine/:id", (req, res) => {
     MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;
@@ -15,14 +16,16 @@ router.delete("/wine/:id", (req, res) => {
         const wine = db.collection("wine");
         let id = req.params.id;
 
-        wine.deleteOne({ _id: new MongoClient.ObjectId(id) }, function(err, results) {
+        wine.deleteOne({ _id: new ObjectId(id) }, function(err, results) {
             if (err) {
                 throw new Error(err)
             }
-            client.close();
+            
+            client.close();  
+            console.log(req.body)
+            res.redirect("/")
         });
-        //wine.deleteOne({ _id: req.params.id })
-        res.redirect("/")
+
 
     });
 });

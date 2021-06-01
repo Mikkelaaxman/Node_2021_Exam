@@ -1,5 +1,6 @@
 
-/* let dataSet = [
+/* HARDCODE DATA
+let dataSet = [
     { "_id": "60b2b12fcc9f7f4518a97592", "type": "Red", "year": "2019", "name": "Hardcoded Zin", "country": "USA, California" }
 ];
  */
@@ -7,15 +8,6 @@
 async function getWines() {
     const response = await fetch("/api/see_wine")
 
-    /*         .then(result => result.json())
-            .then(json => {
-    
-                for (let i = 0; i < Object.keys(json.foundWines).length; i++) {
-                    dataSet.push(json.foundWines[i]);
-                    console.log("Inside async "+ dataSet[i]);
-                }
-                return dataSet;
-            }) */
     if (!response.ok) {
         throw new Error("An error has occured: " + response.text)
     }

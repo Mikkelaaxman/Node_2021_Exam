@@ -34,7 +34,7 @@ $(document).ready(function () {
         let idField = document.getElementById("_id")
         idField.value = foundWine._id;
 
-    })
+    });
 
     
 });
@@ -49,22 +49,59 @@ async function getWine(id) {
 
 }
 
-// Make an HTTP PUT Request
-async function deleteWine(url) {
-    document.getElementById('id01').style.display = 'block'
+/* document.addEventListener("submit", (e) => {
+    // Store reference to form to make later code easier to read
+    const form = e.target;
 
+    // Post data using the Fetch API
+    fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+    })/* 
+        // We turn the response into text as we expect HTML
+        .then((res) => res.text())
+
+        // Let's turn it into an HTML document
+        .then((text) => new DOMParser().parseFromString(text, "text/html"))
+
+        // Now we have a document to work with let's replace the <form>
+        .then((doc) => {
+            // Create result message container and copy HTML from doc
+            const result = document.createElement("div");
+            result.innerHTML = doc.body.innerHTML;
+
+            // Allow focussing this element with JavaScript
+            result.tabIndex = -1;
+
+            // And replace the form with the response children
+            form.parentNode.replaceChild(result, form);
+
+            // Move focus to the status message
+            result.focus();
+        }); 
+    // Prevent the default form submit
+    e.preventDefault();
+});
+*/
+
+
+async function deleteWine(id) {
+    //document.getElementById('id01').style.display = 'block'
+
+    console.log("ID SEND TO DELETE " + id)
     // Awaiting fetch which contains 
     // method, headers and content-type
-    const response = await fetch("wine/:id", {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json'
-        }
+    fetch("/api/wine/" + id, {
+        method: "DELETE"
     });
-
+    
+/*     if (!response.ok) {
+        throw new Error("An error has occured: " + response.statusText)
+    }
+    
     // Awaiting for the resource to be deleted
-    const resData = 'resource deleted...';
+    const resData = await response.json(); */
 
     // Return response data 
-    return resData;
+    window.location.href = "/";
 };

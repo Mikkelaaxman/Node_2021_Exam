@@ -71,7 +71,8 @@
         <br>
         <input hidden name="_id" id="_id">
         <button type="submit" class="button btn-primary" id="submitBtn">Edit</button>
-        <button class="button btn-danger" id="deleteBtn" onclick="deleteWine()" >Delete</button>
+        <button type="button" class="button btn-danger" id="deleteBtn" onclick="deleteWine(_id.value)" >Delete</button>
+
     </form>
 
 <div id="id01" class="modal">
@@ -83,8 +84,8 @@
             <p>Are you sure you want to delete this wine?</p>
 
             <div class="clearfix">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <button type="button" class="deletebtn">Delete</button>
+                <button type="button" class="button btn-secondary">Cancel</button>
+                <button type="button" class="button btn-danger">Delete</button>
             </div>
         </div>
     </form>
