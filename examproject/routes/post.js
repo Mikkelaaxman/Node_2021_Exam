@@ -20,7 +20,7 @@ router.post("/api/create_wine", (req, res) => {
                 name: req.body.name,
                 country: req.body.country,
                 price: Number(req.body.price),
-                url: req.body.url
+                imageURL: req.body.url
 
             },
             (error, result) => {
