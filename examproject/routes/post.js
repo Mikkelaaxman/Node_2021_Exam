@@ -15,21 +15,22 @@ router.post("/api/create_wine", (req, res) => {
 
 
         wine.insertOne({
-            type: req.body.type,
-            year: req.body.year,
-            name: req.body.name,
-            country: req.body.country,
-            price: req.body.price,
-            url: req.body.url
+                type: req.body.type,
+                year: Number(req.body.year),
+                name: req.body.name,
+                country: req.body.country,
+                price: Number(req.body.price),
+                url: req.body.url
 
-        }, (error, result) => {
-            if (error) {
-                throw new Error(error);
-            }
+            },
+            (error, result) => {
+                if (error) {
+                    throw new Error(error);
+                }
 
-            console.log(result);
-            client.close();
-        });
+                console.log(result);
+                client.close();
+            });
         res.redirect("/")
     });
 });

@@ -3,7 +3,7 @@ function getUploads() {
         .then(result => result.json())
         .then(json => {
             console.log(json)
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 5; i++) {
                 const wine = json.foundWines[i];
                 document.getElementById("database").append(wine.name +
                     " made in " + wine.country + ", " + wine.year);
