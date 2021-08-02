@@ -15,8 +15,8 @@ router.patch("/api/edit", (req, res) => {
         console.log("EDIT WITH ID " + req.body._id)
         const db = client.db(dbName);
         const wine = db.collection("wine");
-        var myquery = { "_id": new ObjectId(req.body._id) };
-        var newvalues = {
+        let myquery = { "_id": new ObjectId(req.body._id) };
+        let newvalues = {
             $set: {
                 type: req.body.type,
                 year: req.body.year,
@@ -38,7 +38,7 @@ router.patch("/api/edit", (req, res) => {
                 client.close()
                 res.redirect("/")
             },
-            2 * 1000
+            2000    //wait 2 sec
         );
         
         

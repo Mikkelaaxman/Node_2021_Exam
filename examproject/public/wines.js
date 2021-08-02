@@ -17,48 +17,39 @@ async function getWines() {
 }
 
 
-function editWine(wine) {
-    window.location.href = "/edit/" + wine._id;
 
-    console.log("EDIT WINE CALLED WITH " + wine._id)
-}
 function likeWine(wine) {
+    
+    const socket = io();
 
+    const id = wine._id
+
+    //event emitter 
+    socket.emit("wineLiked", {
+        id
+    });
+
+    //Event subscribtion
+    socket.on("thisWineLiked", (data) => {
+        console.log("liked WIne : "+ data._id)
+/*         let alert = document.createElement("alert")
+        alert.value("Liked wine with id " + data) */
+    } )
     console.log("LIKE wine called with id: " + wine._id)
 }
 
 
 $(document).ready(function () {
 
-
-    //console.log(dataSet[0]);
-
-    /*    DOESNT WORK
-         console.log("Now creating table beginning with " + dataSet[0].name)
-        $("#wineTable").DataTable({
-            data: dataSet, //Should just be dataset but gets error with missing row 0? 
-            columns: [
-                { title: "_id" },
-                { title: "type" },
-                { title: "year" },
-                { title: "name" },
-                { title: "country" },
-            ]
-        }); */
-
     var table = document.getElementById("wineTable");
 
     getWines().then(dataSet => {
-
-        dataSet;
-
-        console.log(dataSet.foundWines);
 
         for (let i = 0; i < dataSet.foundWines.length; i++) {
 
             // Create an empty <tr> element and add it to the 1st position of the table:
             let row = table.insertRow(i); //+1 because header is 0
-            
+
             // Insert new cells (<td> elements) at the the "new" <tr> element:
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
@@ -81,33 +72,27 @@ $(document).ready(function () {
             likebtn.className = "btn btn-success";
             likebtn.value = "Like!"
             cell6.appendChild(likebtn);
-            likebtn.onclick = (function (wine) { return function () { likeWine(wine); } })(wine);
+            likebtn.onclick = (function (wine) {return function () { likeWine(wine); } }) (wine);
 
             var btn = document.createElement('input');
             btn.type = "button";
             btn.className = "btn btn-primary";
             btn.value = "Edit"
             cell7.appendChild(btn);
-            btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine); 
+            btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine);
         }
 
     }).catch(error => {
         error.message;
     });
 
-
-    /*      Proper way to do it, but cant appendChild to cell 
-            var btn = document.createElement('input');
-            btn.type = "button";
-            btn.className = "btn";
-            btn.value = dataSet[i]._id;
-           // btn.onclick = (function (value) { return function () { editWine(dataset); } })(entry);
-    
-            cell5.appendChild(btn); */
-
-
 });
 
+function editWine(wine) {
+    window.location.href = "/edit/" + wine._id;
+
+    console.log("EDIT WINE CALLED WITH " + wine._id)
+}
 
 //for when we add like button 
 /* function operateFormatter(value, row, index) {
