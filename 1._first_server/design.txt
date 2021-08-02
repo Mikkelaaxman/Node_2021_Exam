@@ -1,7 +1,0 @@
-HTTP            Endpoint                Endpoint
-                /cars                   /cars/id
-
-GET             retrive all cars.       Get car by ID.
-POST            Create car(s).          N/A
-PUT/PATCH       Update all cars.        Update car by ID.
-DELETE          Delete all cars.        Delete car by ID.
