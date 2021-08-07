@@ -6,7 +6,7 @@ let dataSet = [
  */
 
 async function getWines() {
-    const response = await fetch("/api/see_wine")
+    const response = await fetch("/api/wine")
 
     if (!response.ok) {
         throw new Error("An error has occured: " + response.text)
@@ -91,7 +91,6 @@ $(document).ready(function () {
 function editWine(wine) {
     window.location.href = "/edit/" + wine._id;
 
-    console.log("EDIT WINE CALLED WITH " + wine._id)
 }
 
 //for when we add like button 

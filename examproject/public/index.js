@@ -1,5 +1,5 @@
-function getUploads() {
-    fetch('/api/see_wine')
+async function getUploads() {
+    await fetch('/api/wine')
         .then(result => result.json())
         .then(json => {
             console.log(json)

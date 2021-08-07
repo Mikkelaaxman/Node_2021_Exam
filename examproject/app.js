@@ -1,5 +1,5 @@
 const express = require("express");
-const MongoClient = require("mongodb").MongoClient;
+const db = require("./db")
 const bodyParser = ("body-parser")
 const methodOverride = require('method-override');
 
@@ -16,19 +16,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(methodOverride('_method')); //We need this to change html form method to work with PATCH
 
+//Router
+const wineRoute = require("./routes/wineRoute")
+/* 
 const readRouter = require("./routes/read.js");
 const postRouter = require("./routes/post.js");
 const patchRouter = require("./routes/patch.js");
 const deleteRouter = require("./routes/delete.js");
 const singleRouter = require("./routes/readSingle.js");
+ */
 
-app.use(readRouter.router);
+app.use(wineRoute.router)
+
+/* app.use(readRouter.router);
 app.use(postRouter.router);
 app.use(deleteRouter.router);
 app.use(patchRouter.router);
 app.use(singleRouter.router);
-
-
+ */
 /* const url = "mongodb://localhost:27017";
 const dbName = "beverages" */
 
@@ -37,19 +42,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create", (req, res) => {
-    res.sendFile(`${__dirname}/public/create_wine.html`);
+    res.sendFile(`${__dirname}/public/create_wine/create_wine.html`);
 });
 
-app.get("/view", (req, res) => {
+/* app.get("/view", (req, res) => {
     res.sendFile(`${__dirname}/public/wine.html`);
-});
+}); */
 
 app.get("/all", (req, res) => {
-    res.sendFile(`${__dirname}/public/wines.html`);
+    res.sendFile(`${__dirname}/public/list_wines/wines.html`);
 });
 
 app.get("/edit/:id", (req, res) => {
-    res.sendFile(`${__dirname}/public/edit.html`);
+    res.sendFile(`${__dirname}/public/edit_wine/edit_wine.html`);
 });
 
 
@@ -74,13 +79,23 @@ io.on("connection", (socket) => {
 
 });
 
-
-
 const port = process.env.PORT || 8080;
+const url = "mongodb://localhost:27017";
 
-server.listen(port, (error) => {
-    if (error) {
-        console.log(error);
+// Connect to Mongo on start
+db.connect(url, function (err) {
+    if (err) {
+        console.log('Unable to connect to Mongo.')
+        process.exit(1)
+    } else {
+        server.listen(port, (error) => {
+            if (error) {
+                console.log(error);
+            }
+            console.log("Server is running on port:", Number(port));
+        });
     }
-    console.log("Server is running on port:", Number(port));
-});
+})
+
+
+

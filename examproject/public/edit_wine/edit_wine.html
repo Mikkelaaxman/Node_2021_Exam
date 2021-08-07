@@ -20,7 +20,8 @@
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
         crossorigin="anonymous"></script>
 
-    <script src="/edit.js"></script>
+    <script src="/edit_wine/edit_wine.js"></script>
+    <style src="/edit_wine/edit_wine.css"></style>
 
 <body>
     <!-- Header -->
@@ -48,7 +49,8 @@
     <!-- /Header -->
     <button class="button btn-primary" onclick="goBack()">Go Back</button>
 
-    <form method="POST" action="/api/edit?_method=PATCH">
+    <div class="container">
+    <form method="POST" action="/api/wine?_method=PATCH">
         <label>Type</label>
         <input name="type" id="type" autofocus required placeholder="type">
         <br>
@@ -73,7 +75,7 @@
         <button type="button" class="button btn-danger" id="deleteBtn" onclick="deleteWine(_id.value)" >Delete</button>
         
     </form>
-
+</div>
 <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'" class="close"
         title="Close Modal">&times;</span>

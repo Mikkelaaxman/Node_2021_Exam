@@ -43,7 +43,7 @@ $(document).ready(function () {
 
 
 async function getWine(id) {
-    const response = await fetch("/api/see_wine/" + id)
+    const response = await fetch("/api/wine/" + id)
     if (!response.ok) {
         throw new Error("An error has occured: " + response.text)
     }
@@ -60,6 +60,8 @@ async function deleteWine(id) {
     // method, headers and content-type
     fetch("/api/wine/" + id, {
         method: "DELETE"
+    }).catch((error) => {
+        console.error(error)
     });
 
     /*     if (!response.ok) {
