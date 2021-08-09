@@ -1,38 +1,14 @@
 const router = require("express").Router();
-
+const db = require("../db")
 const ObjectId = require('mongodb').ObjectID;
 
 const dbName = "beverages"
 const collection = "wine"
-const db = require("../db")
 
-/* async function localClient(callback) {
-
-    try {
-        await MongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-
-            const db = client.db(dbName);
-
-
-        });
-
-        await listdbs(client);
-        await deleteByID(db);
-
-        await deleteByID(client)
-    } catch (error) {
-        console.error(error);
-    } finally {
-        await client.close();
-    }
-} */
-
-//read Single
+//Read Single
 router.get("/api/wine/:_id", (req, res) => {
 
     const wine = db.get(dbName).collection(collection);
-
-    // console.log(req.params._id)
 
     wine.find({ "_id": new ObjectId(req.params._id) }).toArray((error, foundWines) => {
         if (error) {
@@ -41,7 +17,6 @@ router.get("/api/wine/:_id", (req, res) => {
         res.send({ foundWines })
     });
 });
-
 
 //Read All 
 router.get("/api/wine", (req, res) => {
@@ -79,8 +54,11 @@ router.patch("/api/wine", (req, res) => {
     console.log("WINE UPDATED NAME: " + req.body.name)
     try {
         wine.updateOne(myquery, newvalues);
+
+        res.send("success");
     } catch (error) {
         console.error(error)
+        res.status(error.Number).send(error);
     }
     /*         setTimeout(
                 () => {
@@ -110,18 +88,31 @@ router.delete("/api/wine/:id", (req, res) => {
 router.post("/api/wine", (req, res) => {
 
     const wine = db.get(dbName).collection(collection);
+        
+    console.log(req.body);
+    console.log(req.headers);
+    console.log(req.ip);
+    console.log(req.body.type);
 
-    wine.insertOne({
-        type: req.body.type,
-        year: Number(req.body.year),
-        name: req.body.name,
-        country: req.body.country,
-        price: Number(req.body.price),
-        imageURL: req.body.url
+        wine.insertOne({
+            
+            type: req.body.type,
+            year: req.body.year,
+            name: req.body.name,
+            country: req.body.country,
+            price: req.body.price,
+            imageURL: req.body.url
+            //likes : 0
+        }, function(err, results){
+            if(err){
+                console.log(req.body);
+                throw new Error(err)
+            } else {
+                console.log(req.body);
+                res.send("success")
+            }
+        })
 
-    }
-
-    );
 });
 
 

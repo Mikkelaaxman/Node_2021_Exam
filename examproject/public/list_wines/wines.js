@@ -61,11 +61,11 @@ $(document).ready(function () {
 
             wine = dataSet.foundWines[i];
             // Add some text to the new cells:
-            cell1.innerHTML = wine.name;
-            cell2.innerHTML = wine.country;
-            cell3.innerHTML = wine.type;
-            cell4.innerHTML = wine.year;
-            cell5.innerHTML = wine.price;
+            cell1.textContent = wine.name;
+            cell2.textContent = wine.country;
+            cell3.textContent = wine.type;
+            cell4.textContent = wine.year;
+            cell5.textContent = wine.price;
 
             var likebtn = document.createElement('input');
             likebtn.type = "button";

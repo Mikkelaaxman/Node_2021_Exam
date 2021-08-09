@@ -16,15 +16,15 @@ async function getUploads() {
                 card.className = "card text-center"
                 let header = document.createElement("div")
                 header.className = "card-header"
-                header.innerHTML = "Type: " + wine.type;
+                header.textContent = "Type: " + wine.type;
                 let body = document.createElement("div")
                 body.className = "card-body"
                 let title = document.createElement("h5")
                 title.className = "card-title"
-                title.innerHTML = wine.name;
+                title.textContent = wine.name;
                 let p = document.createElement("p")
                 p.className = "card-text"
-                p.innerHTML = "Country of origin: " + wine.country + ", Price: " + wine.price;
+                p.textContent = "Country of origin: " + wine.country + ", Price: " + wine.price;
                 let image = document.createElement("img")
                 image.className = "img-thumbnail"
                 image.src = wine.imageURL;
@@ -38,7 +38,7 @@ async function getUploads() {
 
                 let footer = document.createElement("div")
                 footer.className = "card-footer text-muted"
-                footer.innerHTML = "2 days ago - ID:" + wine._id;
+                footer.textContent = "2 days ago - ID:" + wine._id;
 
                 body.appendChild(title)
                 body.appendChild(image)

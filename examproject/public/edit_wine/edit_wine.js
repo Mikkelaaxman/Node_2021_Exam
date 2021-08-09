@@ -10,7 +10,7 @@ $(document).ready(function () {
     let url_array = full_url.split('/') // Split the string into an array with / as separator
     let last_segment = url_array[url_array.length - 1];  // Get the last part of the array (-1)
 
-    getWine(last_segment).then(wine => {
+        getWine(last_segment).then(wine => {
 
 
         foundWine = wine.foundWines[0]
@@ -33,11 +33,11 @@ $(document).ready(function () {
         let idField = document.getElementById("_id")
         idField.value = foundWine._id;
 
-    })
-        .catch((error) => {
+        
+        }).catch((error) => {
             console.error(error)
         });
-
+    
 
 });
 
@@ -75,18 +75,18 @@ async function deleteWine(id) {
     window.location.href = "/";
 };
 
- 
-/*  //Changing default behaviour of FORM here, but doesnt work yet.
-    //FormData probably isnt filled because form is async from getwine. need to wait for form to be filled. 
+
+  //Changing default behaviour of FORM here, but doesnt work yet.
+    //FormData probably isnt filled because form is async from getwine. need to wait for form to be filled.
     //Use util.promisify?
- 
+/* 
  document.addEventListener("submit", (e) => {
     // Store reference to form to make later code easier to read
     const form = e.target;
-
+    
     // Post data using the Fetch API
     fetch(form.action, {
-        method: form.method, //or "PATCH" 
+        method: form.method, //or "PATCH"
         body: new FormData(form),
     })
 
@@ -126,5 +126,5 @@ async function deleteWine(id) {
     form.querySelector("[role=alert]").hidden = true;;
     // Prevent the default form submit
     e.preventDefault();
-}); */
-
+});
+ */
