@@ -79,3 +79,55 @@ document.addEventListener("submit", (e) => {
     });
 
 });
+/* 
+  $jsonSchema: {
+    bsonType: 'object',
+        required: [
+            'name',
+            'year',
+            'type',
+            'price',
+            'country'
+        ],
+            properties: {
+        name: {
+            bsonType: 'string',
+            pattern: "/([ÆØÅæøåA-Za-z0-9\s\'\-])+/",
+            description: 'must be a string and is required'
+        },
+        year: {
+            bsonType: 'int',
+                minimum: 1900,
+                maximum: 3000,
+                description: 'must be an integer in [ 1900, 3000 ] and is required'
+        },
+        type: {
+            'enum': [
+                'Red',
+                'White',
+                'Rose',
+                'Dessert',
+                'Other'
+            ],
+                description: 'can only be one of the enum values and is required'
+        },
+        price: {
+            bsonType: [
+                'double'
+            ],
+                description: 'must be a double if the field exists'
+        },
+        country: {
+            bsonType: [
+                'string'
+            ]
+        },
+        imageURL: {
+          bsonType: [
+            "string"
+            ],
+            pattern: "/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/",
+            description: "Must be string and fit URL Regex pattern if exist"
+        }
+    }
+}  */

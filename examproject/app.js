@@ -1,19 +1,22 @@
 const express = require("express");
 const app = express();
 
+
+const formidableMiddleware = require('express-formidable');
+
 const methodOverride = require('method-override');
 const escapeHtml = require("html-escaper").escape;
 
+app.use(formidableMiddleware());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+//app.use(methodOverride('_method')); //We need this to change html form method to work with PATCH
 
 const db = require("./db")
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
-app.use(methodOverride('_method')); //We need this to change html form method to work with PATCH
 
 //Router
 const wineRoute = require("./routes/wineRoute");
@@ -21,12 +24,12 @@ const utilRoute = require("./routes/utilRoute");
 app.use(wineRoute.router);
 app.use(utilRoute.router);
 
-
-app.use(function (req, res, next) {
+//Cross Browser funtionality
+/* app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-});
+}); */
 
 app.get("/", (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);
@@ -48,7 +51,39 @@ app.get("/all", (req, res) => {
 app.get("/edit/:id", (req, res) => {
     res.sendFile(`${__dirname}/public/edit_wine/edit_wine.html`);
 });
+/* const dbName = "beverages"
+const collection = "wine"
+//CREATE WINE 
+app.post("/api/wine", express.json(), (req, res) => {
 
+    const wine = db.get(dbName).collection(collection);
+    console.log(req.fields.body);
+
+    console.log(req.body.body);
+    console.log(req.headers);
+    console.log(req.ip);
+
+    wine.insertOne({
+
+        type: req.body.type,
+        year: req.body.year,
+        name: req.body.name,
+        country: req.body.country,
+        price: req.body.price,
+        imageURL: req.body.url
+        //likes : 0
+    }, function (err, results) {
+        if (err) {
+            console.log(req.body);
+            throw new Error(err)
+        } else {
+            console.log(req.body);
+            res.send("success")
+        }
+    })
+
+});
+ */
 
 io.on("connection", (socket) => {
     // console.log("A socket connected with id", socket.id);

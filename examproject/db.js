@@ -32,17 +32,18 @@ exports.create = function () {
     db.createCollection("beverages", {
         validator: {
             $jsonSchema: {
-                bsonType: "object",
+                bsonType: 'object',
                 required: [
-                    "name",
-                    "year",
-                    "type",
-                    "price",
-                    "country"
+                    'name',
+                    'year',
+                    'type',
+                    'price',
+                    'country'
                 ],
                 properties: {
                     name: {
                         bsonType: 'string',
+                        pattern: '([ÆØÅæøåA-Za-z0-9s\'-])+',
                         description: 'must be a string and is required'
                     },
                     year: {
@@ -63,14 +64,21 @@ exports.create = function () {
                     },
                     price: {
                         bsonType: [
-                            "double"
+                            'double'
                         ],
-                        description: "must be a double if the field exists"
+                        description: 'must be a double if the field exists'
                     },
                     country: {
+                        bsonType: 'string',
+                        pattern: '[^<>;]',
+                        description: 'Must be string'
+                    },
+                    imageURL: {
                         bsonType: [
-                            "string"
-                        ]
+                            'string'
+                        ],
+                        pattern: '[^æøåÆØÅ<>s;]',
+                        description: 'Must be string and fit URL Regex pattern if exist'
                     }
                 }
             }

@@ -25,8 +25,8 @@
     "homepage": "https://github.com/victorwp288/kea_node#readme",
     "dependencies": {
         "assert": "^2.0.0",
-        "body-parser": "^1.19.0",
         "express": "^4.17.1",
+        "express-formidable": "^1.2.0",
         "fetch": "^1.1.0",
         "html-escaper": "^3.0.3",
         "mongodb": "^3.6.6",

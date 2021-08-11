@@ -1,3 +1,4 @@
+
 function goBack() {
     window.history.back();
 }
@@ -47,52 +48,77 @@ document.addEventListener("submit", (e) => {
 
     // Store reference to form to make later code easier to read
     const form = e.target;
-    console.log(form);
-    const data = new FormData(form);
-    console.log( document.getElementById("country-dropdown").value)
-/*     data.append("name", form.name.value)
-    data.append("type", form.type.value) */
 
-    var object = {};
-    data.forEach((value, key) => object[key] = value);
-    var json = JSON.stringify(object);
+    const result = createWine(form);
 
-    console.log(json);
-    // Post data using the Fetch API
-    fetch(form.action, {
-        headers: { "content-type": "application / json" },
-    //    contentType: "multipart / form-data",
-    //  enctype='application/x-www-form-urlencoded',
-     //   contentType: "",
-        method: form.method,
-        body: json
-        
-    //    processData: false,
+    const alert = document.getElementById("alert");
+    alert.textContent = result;
+    alert.hidden = false;
 
-    //    contentType: false,
-    }).then(res => {
-
-        console.log(res.text())
-    })
-        .catch((err) => {
-
-        
-            console.log(err);
-        });
-
-
+/*     if(result == "success"){
+        setTimeout(
+            () => {
+                goBack();
+            },
+            3000    //wait 3 sec
+        );
+    } */
 });
+
+async function createWine(form) {
+    const data = new FormData(form);
+
+    //data.append("country", document.getElementById("country-dropdown").value)
+
+    //If we need it in json format
+/*     var object = {};
+    data.forEach((value, key) => object[key] = value);
+    var json = JSON.stringify(object);    
+     */
+
+    //also possible to append json to the formdata prototype 
+    //data.append("json", json);
+
+    (async () => {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: data
+
+        //  headers: { "Content-Type": "application / json" },
+        //  contentType: "multipart / form-data",
+        //  enctype='application/x-www-form-urlencoded',
+        //  processData: false,
+
+        })
+            .then(function (res) { 
+                console.log("Success")
+                return JSON.stringify(res.json) })
+            .catch((err) => {
+                console.log(err);
+                return err;
+            });
+
+            console.log(response)
+    })();
+}
 
 async function formValidate(form) {
     const formData = new FormData(form);
+    
+    //API
+    if(form.action != "api/wine/") {
+        return "Form action error"
+    }
 
-    console.log(formData)
+    //method
+    if(form.method != "post"){
+        return "Method error: is not post"
+    }
+
     //Type
     const type = formData.get("type");
-    console.log(type)
-    console.log("ACTION " + formData.get("action"))
-
-    if (type != "Red") {
+    if (type != "Red" || type != "White" || type != "Rose" || type != "Dessert" || type != "Other") {
+        console.log("type")
 
         return "type failed validation"
     }
@@ -100,18 +126,28 @@ async function formValidate(form) {
     //Year
     const year = formData.get("year");
     console.log(year)
-
+    //Year is string here but js can compare it
     if (year <= 1900 || year >= 3000) {
-        console.log("year failed")
+        console.log("year")
 
         return "Year Failed Validation"
     }
 
     //Name 
     if (typeof (formData.get("name")) != "string") {
-        console.log("name failed")
-        return "Name Validation Failed"
+        return "Name type Validation Failed"
+    }
+    //Matches letters, numbers, space, dash and hyphen
+    let nameRGEX = /([ÆØÅæøåA-Za-z0-9\s\'\-])+/;
+    if(!nameRGEX.test(formData.get("name"))){
+        console.log("name")
 
+        return "Name must only be numbers and letters"
+    }
+
+    //Country
+    if(formData.get("country") == "Choose Country"){
+        return "Country cant be that"
     }
 
     //Price 
@@ -129,5 +165,7 @@ async function formValidate(form) {
 
         return "URL validation Failed"
     }
-    return "OK";
+
+    console.log("Creating fetch ")
+    createWine(form).then((res) => {return res} ).catch();
 }

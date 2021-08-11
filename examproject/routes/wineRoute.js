@@ -85,33 +85,43 @@ router.delete("/api/wine/:id", (req, res) => {
 });
 
 //CREATE WINE 
-router.post("/api/wine", (req, res) => {
+router.post("/api/wine/", (req, res, next) => {
 
     const wine = db.get(dbName).collection(collection);
-        
-    console.log(req.body);
-    console.log(req.headers);
-    console.log(req.ip);
-    console.log(req.body.type);
 
-        wine.insertOne({
-            
-            type: req.body.type,
-            year: req.body.year,
-            name: req.body.name,
-            country: req.body.country,
-            price: req.body.price,
-            imageURL: req.body.url
-            //likes : 0
-        }, function(err, results){
-            if(err){
-                console.log(req.body);
-                throw new Error(err)
-            } else {
-                console.log(req.body);
-                res.send("success")
-            }
-        })
+/*     console.log( req.fields.type,req.fields.year,req.fields.name,
+               req.fields.country,
+                   req.fields.price,
+                   req.fields.url);
+
+    ;        
+    if(req.fields.price instanceof String){
+        console.log("Price is a string")
+    }
+ */
+
+    wine.insertOne({
+
+        type: req.fields.type,
+        year: Number(req.fields.year),
+        name: req.fields.name,
+        country: req.fields.country,
+        price: Number(req.fields.price),
+        imageURL: req.fields.url
+    
+    }
+/*     Promise.resolve().then(function () {
+        throw new Error('BROKEN')
+    }).catch(next) // Errors will be passed to Express. */
+    , function (err, results) {
+        if (err) {
+            res.send(err)
+            throw new Error(err)
+        } else {
+            console.log("sending results now" + results)
+            res.send(results);
+        }
+    });
 
 });
 
