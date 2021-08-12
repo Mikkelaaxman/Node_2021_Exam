@@ -9,16 +9,20 @@ async function getUploads() {
             
             for (let i = 0; i < Object.keys(json.foundWines).length; i++) {
                 const wine = json.foundWines[i];
-
+ 
                 let div = document.createElement("div")
-                div.className = "col-lg-3 col-md-6"
+                div.className = "col-lg-3 col-md-6" 
                 let card = document.createElement("div")
                 card.className = "card text-center"
                 let header = document.createElement("div")
-                header.className = "card-header"
+                header.className = "card-header bg-dark text-white"
                 header.textContent = "Type: " + wine.type;
+                let likeheader = document.createElement("div")
+                likeheader.textContent = "Likes: " + wine.likes;
+                likeheader.style = "color:green; margin-left:100px";
+                header.appendChild(likeheader)
                 let body = document.createElement("div")
-                body.className = "card-body"
+                body.className = "card-body bg-secondary text-white"
                 let title = document.createElement("h5")
                 title.className = "card-title"
                 title.textContent = wine.name;
@@ -32,13 +36,17 @@ async function getUploads() {
 
                 var btn = document.createElement('input');
                 btn.type = "button";
-                btn.className = "btn btn-primary";
+                btn.className = "btn btn-dark";
                 btn.value = "Edit"
                 btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine);
 
                 let footer = document.createElement("div")
-                footer.className = "card-footer text-muted"
-                footer.textContent = "2 days ago - ID:" + wine._id;
+                footer.className = "card-footer text-muted text-white bg-dark"
+                let date = new Date(wine.date);
+                let day = date.getDay();
+                let month = date.getDate();
+                let year = date.getFullYear(); 
+                footer.textContent = "Created on " + wine.date;
 
                 body.appendChild(title)
                 body.appendChild(image)

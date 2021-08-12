@@ -86,15 +86,21 @@ app.post("/api/wine", express.json(), (req, res) => {
  */
 
 io.on("connection", (socket) => {
-    // console.log("A socket connected with id", socket.id);
-    socket.on("thisWineLiked", (data) => {
-        io.emit("likeThisWine", { _id: escapeHtml(data._id) })
+    console.log("A socket connected with id", socket.id);
+
+    //Likes
+    socket.on("wineLiked", (data) => {
+        io.emit("likeThisWine", { 
+        wine: data.wine,
+        index: escapeHtml(data.index)
+    });
+    console.log(data.wine.likes)
     });
 
+    //Color
     socket.on("colorChanged", (data) => {
         // changes the color for ALL the sockets in the io namespace
         io.emit("changeBackgroundToThisColor", { color: escapeHtml(data.color) });
-
         // changes the color ONLY for the socket that made the change
         // socket.emit("changeBackgroundToThisColor", data);
 
@@ -105,7 +111,6 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         console.log("A socket disconnect");
     });
-
 });
 
 const port = process.env.PORT || 8080;

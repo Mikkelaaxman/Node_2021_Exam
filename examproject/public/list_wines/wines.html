@@ -10,7 +10,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!--     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table-locale-all.min.js"></script>
  -->
     <script src='list_wines/wines.js'></script>
@@ -31,7 +32,7 @@
                     <a href="/create" class="nav-link">Add Wine</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="/all" class="nav-link">All wines</a>
+                    <a href="/all" class="nav-link active" style="text-decoration: underline;">All Wines</a>
                 </li>
             </ul>
         </div>
@@ -42,9 +43,9 @@
     <!-- /Header -->
 
     <!-- Wine Table -->
-    <h5>All Wines</h5>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
+    <div class="table-responsive" style="margin:20px; width:90%; position: static; ">
+        <table class="table table-striped table-hover table-dark">
+            <h5>All Wines</h5>
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Wine</th>
@@ -52,6 +53,7 @@
                     <th scope="col">Type</th>
                     <th scope="col">Year</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Likes</th>
                     <th scope="col">Like</th>
                     <th scope="col">Edit</th>
 
@@ -68,245 +70,3 @@
 </body>
 
 </html>
-<!-- <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
-
-    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
-</head>
-<style>
-    .select,
-    #locale {
-        width: 100%;
-    }
-
-    .like {
-        margin-right: 10px;
-    }
-</style>
-
-<body>
-    <div id="toolbar">
-        <button id="remove" class="btn btn-danger" disabled>
-            <i class="fa fa-trash"></i> Delete
-        </button>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover table-borderless ">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col" data-field="name">Name</th>
-                    <th scope="col" data-field="id">Area</th>
-                    <th scope="col" data-field="price">Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row" >1</th>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Adipisicing</td>
-                    <td>Elit</td>
-                    <td>Sint</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Hic</td>
-                    <td>Fugiat</td>
-                    <td>Temporibus</td>
-                </tr>
-            </tbody>
-
-            <caption>
-                Captions of the table
-            </caption>
-        </table>
-
-        <script>
-            var $table = $('#table')
-            var $remove = $('#remove')
-            var selections = []
-
-            function getIdSelections() {
-                return $.map($table.Datatable('getSelections'), function (row) {
-                    return row.id
-                })
-            }
-
-            function responseHandler(res) {
-                $.each(res.rows, function (i, row) {
-                    row.state = $.inArray(row.id, selections) !== -1
-                })
-                return res
-            }
-
-            function detailFormatter(index, row) {
-                var html = []
-                $.each(row, function (key, value) {
-                    html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-                })
-                return html.join('')
-            }
-
-            function operateFormatter(value, row, index) {
-                return [
-                    '<a class="like" href="javascript:void(0)" title="Like">',
-                    '<i class="fa fa-heart"></i>',
-                    '</a>  ',
-                    '<a class="remove" href="javascript:void(0)" title="Remove">',
-                    '<i class="fa fa-trash"></i>',
-                    '</a>'
-                ].join('')
-            }
-
-            window.operateEvents = {
-                'click .like': function (e, value, row, index) {
-                    alert('You click like action, row: ' + JSON.stringify(row))
-                },
-                'click .remove': function (e, value, row, index) {
-                    $table.Datatable('remove', {
-                        field: 'id',
-                        values: [row.id]
-                    })
-                }
-            }
-
-            function totalTextFormatter(data) {
-                return 'Total'
-            }
-
-            function totalNameFormatter(data) {
-                return data.length
-            }
-
-            function totalPriceFormatter(data) {
-                var field = this.field
-                return '$' + data.map(function (row) {
-                    return +row[field].substring(1)
-                }).reduce(function (sum, i) {
-                    return sum + i
-                }, 0)
-            }
-
-            function initTable() {
-                console.log("Table init ");
-                $table.Datatable('destroy').Datatable({
-                    height: 550,
-                    //   locale: $('#locale').val(),
-                    columns: [
-                        [{
-                            field: 'state',
-                            checkbox: true,
-                            rowspan: 2,
-                            align: 'center',
-                            valign: 'middle'
-                        }, {
-                            title: 'Item ID',
-                            field: 'id',
-                            rowspan: 2,
-                            align: 'center',
-                            valign: 'middle',
-                            sortable: true,
-                            footerFormatter: totalTextFormatter
-                        }, {
-                            title: 'Item Detail',
-                            colspan: 3,
-                            align: 'center'
-                        }],
-                        [{
-                            field: 'name',
-                            title: 'Item Name',
-                            sortable: true,
-                            footerFormatter: totalNameFormatter,
-                            align: 'center'
-                        }, {
-                            field: 'price',
-                            title: 'Item Price',
-                            sortable: true,
-                            align: 'center',
-                            footerFormatter: totalPriceFormatter
-                        }, {
-                            field: 'operate',
-                            title: 'Item Operate',
-                            align: 'center',
-                            clickToSelect: false,
-                            events: window.operateEvents,
-                            formatter: operateFormatter
-                        }]
-                    ]
-                })
-                $table.on('check.bs.table uncheck.bs.table ' +
-                    'check-all.bs.table uncheck-all.bs.table',
-                    function () {
-                        $remove.prop('disabled', !$table.Datatable('getSelections').length)
-
-                        // save your data, here just save the current page
-                        selections = getIdSelections()
-                        // push or splice the selections if you want to save all data selections
-                    })
-                $table.on('all.bs.table', function (e, name, args) {
-                    console.log(name, args)
-                })
-                $remove.click(function () {
-                    var ids = getIdSelections()
-                    $table.Datatable('remove', {
-                        field: 'id',
-                        values: ids
-                    })
-                    $remove.prop('disabled', true)
-                })
-            }
-
-            $(function () {
-                let data = [{
-                    'id': 0,
-                    'name': 'Item 0',
-                    'price': '$0'
-                },
-                {
-                    'id': 1,
-                    'name': 'Item 1',
-                    'price': '$1'
-                },
-                {
-                    'id': 2,
-                    'name': 'Item 2',
-                    'price': '$2'
-                },
-                {
-                    'id': 3,
-                    'name': 'Item 3',
-                    'price': '$3'
-                },
-                {
-                    'id': 4,
-                    'name': 'Item 4',
-                    'price': '$4'
-                },
-                {
-                    'id': 5,
-                    'name': 'Item 5',
-                    'price': '$5'
-                }]
-                $table.bootstrapTable({ data: data })
-                initTable()
-
-                //$('#locale').change(initTable)
-            })
-        </script>
-</body>
-
-</html> -->

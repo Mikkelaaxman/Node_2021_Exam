@@ -49,32 +49,41 @@ document.addEventListener("submit", (e) => {
     // Store reference to form to make later code easier to read
     const form = e.target;
 
-    const result = createWine(form);
+    const response = formValidate(form);
 
-    const alert = document.getElementById("alert");
-    alert.textContent = result;
-    alert.hidden = false;
+    if ( response != "OK") {
+        console.error(response)
+        const alert = document.getElementById("alert");
+        alert.textContent = response;
+        alert.hidden = false;
+    } else {
+       
+        createWine(form);
+        Array.from(form.elements).forEach(field => field.disabled = true);
+    }
 
-/*     if(result == "success"){
-        setTimeout(
-            () => {
-                goBack();
-            },
-            3000    //wait 3 sec
-        );
-    } */
+
+    /*     if(result == "success"){
+            setTimeout(
+                () => {
+                    goBack();
+                },
+                3000    //wait 3 sec
+            );
+        } */
 });
 
 async function createWine(form) {
     const data = new FormData(form);
+    const alert = document.getElementById("alert");
 
     //data.append("country", document.getElementById("country-dropdown").value)
 
     //If we need it in json format
-/*     var object = {};
-    data.forEach((value, key) => object[key] = value);
-    var json = JSON.stringify(object);    
-     */
+    /*     var object = {};
+        data.forEach((value, key) => object[key] = value);
+        var json = JSON.stringify(object);    
+         */
 
     //also possible to append json to the formdata prototype 
     //data.append("json", json);
@@ -84,43 +93,52 @@ async function createWine(form) {
             method: form.method,
             body: data
 
-        //  headers: { "Content-Type": "application / json" },
-        //  contentType: "multipart / form-data",
-        //  enctype='application/x-www-form-urlencoded',
-        //  processData: false,
+            //  headers: { "Content-Type": "application / json" },
+            //  contentType: "multipart / form-data",
+            //  enctype='application/x-www-form-urlencoded',
+            //  processData: false,
 
         })
-            .then(function (res) { 
+            .then(function (res) {
                 console.log("Success")
-                return JSON.stringify(res.json) })
+                alert.textContent = "Success!";
+                alert.style = "color: green";
+                alert.hidden = false;
+            })
             .catch((err) => {
                 console.log(err);
-                return err;
+                alert.textContent = err;
+                alert.hidden = false;
+                Array.from(form.elements).forEach(field => field.disabled = false);
+
             });
 
-            console.log(response)
     })();
 }
 
-async function formValidate(form) {
+function formValidate(form) {
     const formData = new FormData(form);
-    
+
+    console.log(form.action)
     //API
-    if(form.action != "api/wine/") {
+    if (form.action == undefined) {
+        console.log(form.action)
+
         return "Form action error"
     }
 
     //method
-    if(form.method != "post"){
+    if (form.method != "post") {
         return "Method error: is not post"
     }
 
-    //Type
+    //Type !type.equals ("Red") || type != "White" || type != "Rose" || type != "Dessert" || type != "Other"
     const type = formData.get("type");
-    if (type != "Red" || type != "White" || type != "Rose" || type != "Dessert" || type != "Other") {
-        console.log("type")
+    const enums = ["Red","White", "Rose", "Dessert", "Other"]
+    if (!enums.includes(type)) {
+        console.log(type)
 
-        return "type failed validation"
+        return "type can't be that"
     }
 
     //Year
@@ -139,14 +157,15 @@ async function formValidate(form) {
     }
     //Matches letters, numbers, space, dash and hyphen
     let nameRGEX = /([ÆØÅæøåA-Za-z0-9\s\'\-])+/;
-    if(!nameRGEX.test(formData.get("name"))){
+    if (!nameRGEX.test(formData.get("name"))) {
         console.log("name")
 
         return "Name must only be numbers and letters"
     }
 
     //Country
-    if(formData.get("country") == "Choose Country"){
+    console.log("country is " + formData.get("country"))
+    if (formData.get("country") == "Choose Country") {
         return "Country cant be that"
     }
 
@@ -165,7 +184,5 @@ async function formValidate(form) {
 
         return "URL validation Failed"
     }
-
-    console.log("Creating fetch ")
-    createWine(form).then((res) => {return res} ).catch();
+    return "OK"
 }

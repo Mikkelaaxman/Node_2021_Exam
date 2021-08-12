@@ -18,30 +18,52 @@ async function getWines() {
 
 
 
-function likeWine(wine) {
-    
-    const socket = io();
-
-    const id = wine._id
+async function likeWine(wine, index, socket) {
 
     //event emitter 
     socket.emit("wineLiked", {
-        id
+        wine: wine, index: index
     });
 
-    //Event subscribtion
-    socket.on("thisWineLiked", (data) => {
-        console.log("liked WIne : "+ data._id)
-/*         let alert = document.createElement("alert")
-        alert.value("Liked wine with id " + data) */
-    } )
     console.log("LIKE wine called with id: " + wine._id)
 }
 
+async function likeSubscribe(socket, table) {
+
+    //Event subscribtion
+    socket.on("likeThisWine", (data) => {
+
+        //Change number of likes in the cell +1
+        let prevLikes = Number(table.rows[data.index].cells[5].textContent);
+        table.rows[data.index].cells[5].textContent = prevLikes + 1;
+
+        console.log(Object.values(data.wine));
+
+        const wine = data.wine;
+        wine.likes += 1;
+
+        console.log("new likes " + wine.likes)
+        /*         console.log("likes " + data.wine.likes)
+        data.wine.likes = data.wine.likes + 1;
+        console.log("likes after " + data.wine.likes) */
+
+
+        //Patch wine to db
+        fetch("api/likeWine", {
+            method: "PATCH",
+            headers: { "Content-Type": "application / json" },
+            body: JSON.stringify(wine)
+        }).catch((err) => {
+            console.error(err);
+        });
+
+    });
+}
 
 $(document).ready(function () {
+    const socket = io();
 
-    var table = document.getElementById("wineTable");
+    let table = document.getElementById("wineTable");
 
     getWines().then(dataSet => {
 
@@ -58,6 +80,8 @@ $(document).ready(function () {
             let cell5 = row.insertCell(4);
             let cell6 = row.insertCell(5);
             let cell7 = row.insertCell(6);
+            let cell8 = row.insertCell(7);
+
 
             wine = dataSet.foundWines[i];
             // Add some text to the new cells:
@@ -66,22 +90,24 @@ $(document).ready(function () {
             cell3.textContent = wine.type;
             cell4.textContent = wine.year;
             cell5.textContent = wine.price;
+            cell6.textContent = wine.likes;
+
 
             var likebtn = document.createElement('input');
             likebtn.type = "button";
             likebtn.className = "btn btn-success";
             likebtn.value = "Like!"
-            cell6.appendChild(likebtn);
-            likebtn.onclick = (function (wine) {return function () { likeWine(wine); } }) (wine);
+            cell7.appendChild(likebtn);
+            likebtn.onclick = (function (wine) { return function () { likeWine(wine, i, socket); } })(wine);
 
             var btn = document.createElement('input');
             btn.type = "button";
             btn.className = "btn btn-primary";
             btn.value = "Edit"
-            cell7.appendChild(btn);
+            cell8.appendChild(btn);
             btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine);
         }
-
+        likeSubscribe(socket, table);
     }).catch(error => {
         error.message;
     });
@@ -92,27 +118,3 @@ function editWine(wine) {
     window.location.href = "/edit/" + wine._id;
 
 }
-
-//for when we add like button 
-/* function operateFormatter(value, row, index) {
-    return [
-        '<a class="like" href="javascript:void(0)" title="Like">',
-        '<i class="fa fa-heart"></i>',
-        '</a>  ',
-        '<a class="remove" href="javascript:void(0)" title="Remove">',
-        '<i class="fa fa-trash"></i>',
-        '</a>'
-    ].join('')
-}
-
-window.operateEvents = {
-    'click .like': function (e, value, row, index) {
-        alert('You click like action, row: ' + JSON.stringify(row))
-    },
-    'click .remove': function (e, value, row, index) {
-        $table.Datatable('remove', {
-            field: 'id',
-            values: [row.id]
-        })
-    }
-} */
