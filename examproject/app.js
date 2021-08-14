@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 
 app.get("/create", (req, res) => {
     res.sendFile(`${__dirname}/public/create_wine/create_wine.html`);
-    
+
 });
 
 /* app.get("/view", (req, res) => {
@@ -90,11 +90,15 @@ io.on("connection", (socket) => {
 
     //Likes
     socket.on("wineLiked", (data) => {
-        io.emit("likeThisWine", { 
-        wine: data.wine,
-        index: escapeHtml(data.index)
-    });
-    console.log(data.wine.likes)
+        io.emit("likeThisWine", {
+            wine: data.wine,
+            index: escapeHtml(data.index)
+        });
+        socket.emit("likeThisWineDB", {
+            wine: data.wine,
+            index: escapeHtml(data.index)
+        });
+        console.log(data.wine.likes)
     });
 
     //Color

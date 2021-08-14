@@ -40,30 +40,6 @@
         </a>
     </nav>
 
-
-    <input id="color-picker" type="color">
-    <button onclick="sendColor()">Send color</button>
-
-    <div id="choosen-color"></div>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-
-        function sendColor() {
-            const color = document.getElementById("color-picker").value
-
-            socket.emit("colorChanged", {
-                color
-            });
-        }
-
-        socket.on("changeBackgroundToThisColor", (data) => {
-            document.body.style.backgroundColor = data.color;
-            document.getElementById("choosen-color").innerText = data.color;
-        });
-    </script>
-
     <!--Cards-->
     <div class="container">
         <div id="cards" class="row gx-4 justify-content-center">
@@ -91,7 +67,7 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2020 Copyright:
-            <p><a class="text-white" href="https://github.com/mikkelaaxman">Mikkel W. Åxman, mikk990a@stud.kea.dk</a> And <a class="text-white" href="https://github.com/victorwp288">Victor W. Petersen, vict2361@stud.kea.dk</a></p>
+            <p><a class="text-white" href="https://github.com/mikkelaaxman">Mikkel W. Åxman, mikk990a@stud.kea.dk</a></p>
         </div>
         <!-- Copyright -->
     </footer>

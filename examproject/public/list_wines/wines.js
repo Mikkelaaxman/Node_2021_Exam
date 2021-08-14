@@ -37,16 +37,13 @@ async function likeSubscribe(socket, table) {
         let prevLikes = Number(table.rows[data.index].cells[5].textContent);
         table.rows[data.index].cells[5].textContent = prevLikes + 1;
 
-        console.log(Object.values(data.wine));
+
+    });
+
+    //Event subscribtion for single socket
+    socket.on("likeThisWineDB", (data) => {
 
         const wine = data.wine;
-        wine.likes += 1;
-
-        console.log("new likes " + wine.likes)
-        /*         console.log("likes " + data.wine.likes)
-        data.wine.likes = data.wine.likes + 1;
-        console.log("likes after " + data.wine.likes) */
-
 
         //Patch wine to db
         fetch("api/likeWine", {

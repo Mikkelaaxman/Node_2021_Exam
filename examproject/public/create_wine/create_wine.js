@@ -60,6 +60,7 @@ document.addEventListener("submit", (e) => {
        
         createWine(form);
         Array.from(form.elements).forEach(field => field.disabled = true);
+
     }
 
 
@@ -104,13 +105,21 @@ async function createWine(form) {
                 alert.textContent = "Success!";
                 alert.style = "color: green";
                 alert.hidden = false;
+
+                let btn = document.createElement("input");
+                btn.type = "button"
+                btn.value = "Continue ->"
+                btn.className = "button btn-success";
+                btn.onclick = (function () { return function () { window.location.href = "/all" } })();
+
+                alert.appendChild(btn);
             })
             .catch((err) => {
                 console.log(err);
                 alert.textContent = err;
                 alert.hidden = false;
                 Array.from(form.elements).forEach(field => field.disabled = false);
-
+                
             });
 
     })();
