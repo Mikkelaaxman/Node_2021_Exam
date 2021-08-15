@@ -31,9 +31,6 @@ $(document).ready(function () {
 
             foundWine = wine.foundWines[0]
 
-            console.log(foundWine.name)
-            console.log("price" + foundWine.price + "url " + foundWine.imageURL);
-
             //Set all fields values to correct values 
             let nameField = document.getElementById("name");
             nameField.value = foundWine.name;
@@ -47,10 +44,9 @@ $(document).ready(function () {
             priceField.value = foundWine.price;
             let imgField = document.getElementById("url")
             imgField.value = foundWine.imageURL;
+            console.log("ID " + foundWine._id)
             let idField = document.getElementById("_id")
             idField.value = foundWine._id;
-            console.log("ID IS " + foundWine._id)
-
 
         })).catch((error) => {
             console.error(error)
@@ -61,7 +57,6 @@ $(document).ready(function () {
 
 async function getCountries() {
     const response = await fetch("/api/countries")
-
     if (!response.ok) {
         throw new Error("An error has occured: " + response.text)
     }
@@ -81,9 +76,10 @@ async function getWine(id) {
 
 async function deleteWine(id) {
     //document.getElementById('id01').style.display = 'block'
-
+    console.log("DELETING WITH ID" + id)
     // Awaiting fetch which contains 
     // method, headers and content-type
+    if(id){
     fetch("/api/wine/" + id, {
         method: "DELETE"
     }).then(
@@ -94,7 +90,10 @@ async function deleteWine(id) {
     ).catch((error) => {
         console.error(error)
     });
-
+    } else {      
+        const alert = document.getElementById("alert");
+        alert.textContent = "An error occured with ID";
+        alert.hidden = false;}  
 };
 
 document.addEventListener("submit", (e) => {
@@ -151,13 +150,12 @@ async function editWine(form) {
                 btn.value = "Go Back"
                 btn.className = "button btn-success";
                 btn.onclick = (function () { return function () { goBack() } })();
-
+                alert.textContent = "";
                 alert.appendChild(btn);
                 alert.hidden = false;
             })
             .catch((err) => {
-                console.log(err);
-                alert.textContent = err;
+                console.error(err);
                 alert.hidden = false;
                 Array.from(form.elements).forEach(field => field.disabled = false);
 
@@ -168,10 +166,8 @@ async function editWine(form) {
 function formValidate(form) {
     const formData = new FormData(form);
 
-    console.log(form.action)
     //API
     if (form.action == undefined) {
-        console.log(form.action)
 
         return "Form action error"
     }
@@ -185,7 +181,6 @@ function formValidate(form) {
 
     //Year
     const year = formData.get("year");
-    console.log(year)
     //Year is string here but js can compare it
     if (year <= 1900 || year >= 3000) {
 
@@ -203,7 +198,6 @@ function formValidate(form) {
     }
 
     //Country
-    console.log("country is " + formData.get("country"))
     if (formData.get("country") == "Choose Country") {
         return "Country cant be that"
     }

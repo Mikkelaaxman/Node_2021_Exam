@@ -2,19 +2,13 @@ const router = require("express").Router();
 const db = require("../db")
 const ObjectId = require('mongodb').ObjectID;
 
-const dbName = "Beverages"
-const collection = "Wine"
+const dbName = process.env.DB;
+const collection = process.env.COLLECTION;
 
 //CREATE WINE 
 router.post("/api/wine/", (req, res) => {
 
     const wine = db.get(dbName).collection(collection);
-
-    console.log(req.fields.type, req.fields.year, req.fields.name,
-        req.fields.country,
-        req.fields.price,
-        req.fields.url);
-    ;
 
     wine.insertOne({
 
@@ -36,7 +30,6 @@ router.post("/api/wine/", (req, res) => {
                 res.send(err)
                 throw new Error(err)
             } else {
-                console.log("sending results now" + results)
                 res.redirect("/")
             }
         });
@@ -108,7 +101,6 @@ router.patch("/api/wine", (req, res) => {
 //Like wine
 router.patch("/api/likeWine", (req, res) => {
 
-    console.log(req.fields)
     const wine = db.get(dbName).collection(collection);
     let myquery = { "_id": new ObjectId(req.fields._id) };
 
@@ -135,7 +127,7 @@ router.delete("/api/wine/:id", (req, res) => {
     wine.deleteOne({ _id: new ObjectId(id) }, function (err, results) {
         if (err) {
             throw new Error(err)
-        }
+        }else{res.redirect("/all")}
     });
 });
 

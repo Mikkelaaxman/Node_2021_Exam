@@ -39,7 +39,6 @@ app.get("/", (req, res) => {
 
 app.get("/create", (req, res) => {
     res.sendFile(`${__dirname}/public/create_wine/create_wine.html`);
-
 });
 
 app.get("/all", (req, res) => {
@@ -51,7 +50,6 @@ app.get("/edit/:id", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-    console.log("A socket connected with id", socket.id);
 
     //Likes
     socket.on("wineLiked", (data) => {
@@ -65,7 +63,6 @@ io.on("connection", (socket) => {
             wine: data.wine,
             index: escapeHtml(data.index)
         });
-        console.log(data.wine.likes)
     });
 
     //disconnect
@@ -77,18 +74,17 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 8080;
 const url = process.env.HOST;
 
-console.log("PORT"+process.env.PORT)
-console.log("HOST " + process.env.HOST)
+console.log("HOST " + url)
 
 // Connect to Mongo once on start
 db.connect(url, function (err) {
     if (err) {
-        console.log('Unable to connect to Mongo.')
+        console.error('Unable to connect to Database.: ' + err)
         process.exit(1)
     } else {
         server.listen(port, (error) => {
             if (error) {
-                console.log(error);
+                console.error(error);
             }
             console.log("Server is running on port:", Number(port));
         });

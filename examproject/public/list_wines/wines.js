@@ -10,16 +10,15 @@ async function getWines() {
 
 }
 
+//Emitting Like Event
 async function likeWine(wine, index, socket) {
-
     //event emitter 
     socket.emit("wineLiked", {
         wine: wine, index: index
     });
-
-    console.log("LIKE wine called with id: " + wine._id)
 }
 
+//Subscribing to Like Event
 async function likeSubscribe(socket, table) {
 
     //Event subscribtion
@@ -28,15 +27,15 @@ async function likeSubscribe(socket, table) {
         //Change number of likes in the cell +1
         let prevLikes = Number(table.rows[data.index].cells[5].textContent);
         table.rows[data.index].cells[5].textContent = prevLikes + 1;
-
+        //Its just visual changing of the cell, doesnt actually fetch wine info again
     });
 
-    //Event subscribtion for single socket
+    //Event subscribtion for single socket. Connects to DB. 
     socket.on("likeThisWineDB", (data) => {
 
         const wine = data.wine;
 
-        //Patch wine to db
+        //Patch wine with +1 like to db
         fetch("api/likeWine", {
             method: "PATCH",
             headers: { "Content-Type": "application / json" },
@@ -47,12 +46,13 @@ async function likeSubscribe(socket, table) {
 
     });
 }
-
+//On load of doc
 $(document).ready(function () {
     const socket = io();
 
     let table = document.getElementById("wineTable");
 
+    //Get all wines
     getWines().then(dataSet => {
 
         for (let i = 0; i < dataSet.foundWines.length; i++) {
@@ -79,7 +79,7 @@ $(document).ready(function () {
             cell5.textContent = wine.price;
             cell6.textContent = wine.likes;
 
-
+            //Create a like and edit button for each wine 
             var likebtn = document.createElement('input');
             likebtn.type = "button";
             likebtn.className = "btn btn-success";
@@ -94,14 +94,15 @@ $(document).ready(function () {
             cell8.appendChild(btn);
             btn.onclick = (function (wine) { return function () { editWine(wine); } })(wine);
         }
+
+        //Sends the "person" connected and the whole table to socket handler // could probaly just be the row
         likeSubscribe(socket, table);
     }).catch(error => {
         error.message;
     });
-
 });
 
+//On click edit redirect to Edit page with id in parameter
 function editWine(wine) {
     window.location.href = "/edit/" + wine._id;
-
 }

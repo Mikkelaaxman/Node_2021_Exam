@@ -2,8 +2,6 @@ async function getUploads() {
     await fetch('/api/wine')
         .then(result => result.json())
         .then(json => {
-            console.log(json)
-
 
             const cards = document.getElementById("cards");
             
@@ -60,11 +58,10 @@ async function getUploads() {
                 cards.appendChild(div);
 
             }
-        }).catch(error => (console.log(error)));
+        }).catch(error => (console.error(error)));
 }
 function editWine(wine) {
     window.location.href = "/edit/" + wine._id;
-    console.log("EDIT WINE CALLED WITH " + wine._id)
 }
 
 getUploads();

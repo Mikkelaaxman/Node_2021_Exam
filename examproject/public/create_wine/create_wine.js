@@ -82,13 +82,13 @@ async function createWine(form) {
                 btn.type = "button"
                 btn.value = "Success! Continue ->"
                 btn.className = "button btn-success";
-                btn.onclick = (function () { return function () { window.location.href = "/all" } })();                
+                btn.onclick = (function () { return function () { window.location.href = "/all" } })();     
+                alert.textContent = ""           
                 alert.appendChild(btn);
                 alert.hidden = false;
             })
             .catch((err) => {
-                console.error(err);
-                alert.textContent = err;
+
                 alert.hidden = false;
                 Array.from(form.elements).forEach(field => field.disabled = false);
 
@@ -120,7 +120,6 @@ function formValidate(form) {
 
     //Year
     const year = formData.get("year");
-    console.log(year)
     //Year is string here but js can compare it
     if (year <= 1900 || year >= 3000) {
         return "Year Failed Validation"
@@ -137,7 +136,6 @@ function formValidate(form) {
     }
 
     //Country
-    console.log("country is " + formData.get("country"))
     if (formData.get("country") == "Choose Country") {
         return "Country cant be that"
     }
