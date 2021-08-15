@@ -2,8 +2,8 @@ const router = require("express").Router();
 const db = require("../db")
 const ObjectId = require('mongodb').ObjectID;
 
-const dbName = "utils"
-const collection = "countries"
+const dbName = "Utils"
+const collection = "Countries"
 
 //Read all Countries
 router.get("/api/countries", (req, res) => {

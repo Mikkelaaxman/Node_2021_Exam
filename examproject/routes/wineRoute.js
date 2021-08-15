@@ -2,8 +2,8 @@ const router = require("express").Router();
 const db = require("../db")
 const ObjectId = require('mongodb').ObjectID;
 
-const dbName = "beverages"
-const collection = "wine"
+const dbName = "Beverages"
+const collection = "Wine"
 
 //CREATE WINE 
 router.post("/api/wine/", (req, res) => {
