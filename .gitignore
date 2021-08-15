@@ -104,3 +104,6 @@ dist
 .tern-port
 6._nodefolio/package-lock.json
 package-lock.json
+examproject/.env.dev
+examproject/.env.prod
+examproject/DBSchema

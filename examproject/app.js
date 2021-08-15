@@ -1,22 +1,24 @@
 const express = require("express");
 const app = express();
 
-
 const formidableMiddleware = require('express-formidable');
-
-const methodOverride = require('method-override');
 const escapeHtml = require("html-escaper").escape;
+
+if(process.env.NODE_ENV){
+require("dotenv").config({
+    path: `${__dirname}/.env.${process.env.NODE_ENV}`,
+});
+}
 
 app.use(formidableMiddleware());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-//app.use(methodOverride('_method')); //We need this to change html form method to work with PATCH
+
 
 const db = require("./db")
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-
 
 //Router
 const wineRoute = require("./routes/wineRoute");
@@ -40,10 +42,6 @@ app.get("/create", (req, res) => {
 
 });
 
-/* app.get("/view", (req, res) => {
-    res.sendFile(`${__dirname}/public/wine.html`);
-}); */
-
 app.get("/all", (req, res) => {
     res.sendFile(`${__dirname}/public/list_wines/wines.html`);
 });
@@ -51,49 +49,18 @@ app.get("/all", (req, res) => {
 app.get("/edit/:id", (req, res) => {
     res.sendFile(`${__dirname}/public/edit_wine/edit_wine.html`);
 });
-/* const dbName = "beverages"
-const collection = "wine"
-//CREATE WINE 
-app.post("/api/wine", express.json(), (req, res) => {
-
-    const wine = db.get(dbName).collection(collection);
-    console.log(req.fields.body);
-
-    console.log(req.body.body);
-    console.log(req.headers);
-    console.log(req.ip);
-
-    wine.insertOne({
-
-        type: req.body.type,
-        year: req.body.year,
-        name: req.body.name,
-        country: req.body.country,
-        price: req.body.price,
-        imageURL: req.body.url
-        //likes : 0
-    }, function (err, results) {
-        if (err) {
-            console.log(req.body);
-            throw new Error(err)
-        } else {
-            console.log(req.body);
-            res.send("success")
-        }
-    })
-
-});
- */
 
 io.on("connection", (socket) => {
     console.log("A socket connected with id", socket.id);
 
     //Likes
     socket.on("wineLiked", (data) => {
+        //To all sockets
         io.emit("likeThisWine", {
             wine: data.wine,
             index: escapeHtml(data.index)
         });
+        //To creator socket. This calls DB. 
         socket.emit("likeThisWineDB", {
             wine: data.wine,
             index: escapeHtml(data.index)
@@ -101,24 +68,17 @@ io.on("connection", (socket) => {
         console.log(data.wine.likes)
     });
 
-    //Color
-    socket.on("colorChanged", (data) => {
-        // changes the color for ALL the sockets in the io namespace
-        io.emit("changeBackgroundToThisColor", { color: escapeHtml(data.color) });
-        // changes the color ONLY for the socket that made the change
-        // socket.emit("changeBackgroundToThisColor", data);
-
-        // changes the color for ALL the sockets EXCEPT itself
-        // socket.broadcast.emit("changeBackgroundToThisColor", data);
-    });
-
+    //disconnect
     socket.on("disconnect", () => {
         console.log("A socket disconnect");
     });
 });
 
 const port = process.env.PORT || 8080;
-const url = "mongodb://localhost:27017";
+const url = process.env.HOST;
+
+console.log("PORT"+process.env.PORT)
+console.log("HOST " + process.env.HOST)
 
 // Connect to Mongo once on start
 db.connect(url, function (err) {

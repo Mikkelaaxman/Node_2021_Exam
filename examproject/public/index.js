@@ -12,6 +12,7 @@ async function getUploads() {
  
                 let div = document.createElement("div")
                 div.className = "col-lg-3 col-md-6" 
+                div.style = "margin: 20px"
                 let card = document.createElement("div")
                 card.className = "card text-center"
                 let header = document.createElement("div")
@@ -19,7 +20,7 @@ async function getUploads() {
                 header.textContent = "Type: " + wine.type;
                 let likeheader = document.createElement("div")
                 likeheader.textContent = "Likes: " + wine.likes;
-                likeheader.style = "color:green; margin-left:100px";
+                likeheader.style = "color:green; margin-left:120px";
                 header.appendChild(likeheader)
                 let body = document.createElement("div")
                 body.className = "card-body bg-secondary text-white"
@@ -42,11 +43,11 @@ async function getUploads() {
 
                 let footer = document.createElement("div")
                 footer.className = "card-footer text-muted text-white bg-dark"
-                let date = new Date(wine.date);
-                let day = date.getDay();
-                let month = date.getDate();
+                let date = new Date(wine.date)
+                let day = date.getDate();
+                let month = date.getMonth() +1;
                 let year = date.getFullYear(); 
-                footer.textContent = "Created on " + wine.date;
+                footer.textContent = "Created on " + day + "-" + month + "-" + year;
 
                 body.appendChild(title)
                 body.appendChild(image)
@@ -57,10 +58,6 @@ async function getUploads() {
                 card.appendChild(footer)
                 div.appendChild(card)
                 cards.appendChild(div);
-/*                 
-                document.getElementsByClassName("card-header")[i].append(wine.country);
-                document.getElementsByClassName("card-text")[i].append(wine.type + ". Year: " + wine.year);
-                document.getElementsByClassName("card-title")[i].append(wine.name); */
 
             }
         }).catch(error => (console.log(error)));

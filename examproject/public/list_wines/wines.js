@@ -1,10 +1,4 @@
 
-/* HARDCODE DATA
-let dataSet = [
-    { "_id": "60b2b12fcc9f7f4518a97592", "type": "Red", "year": "2019", "name": "Hardcoded Zin", "country": "USA, California" }
-];
- */
-
 async function getWines() {
     const response = await fetch("/api/wine")
 
@@ -15,8 +9,6 @@ async function getWines() {
     return dataSet;
 
 }
-
-
 
 async function likeWine(wine, index, socket) {
 
@@ -36,7 +28,6 @@ async function likeSubscribe(socket, table) {
         //Change number of likes in the cell +1
         let prevLikes = Number(table.rows[data.index].cells[5].textContent);
         table.rows[data.index].cells[5].textContent = prevLikes + 1;
-
 
     });
 
@@ -78,7 +69,6 @@ $(document).ready(function () {
             let cell6 = row.insertCell(5);
             let cell7 = row.insertCell(6);
             let cell8 = row.insertCell(7);
-
 
             wine = dataSet.foundWines[i];
             // Add some text to the new cells:

@@ -29,7 +29,7 @@ exports.close = function (done) {
 }
 
 exports.create = function () {
-    db.createCollection("beverages", {
+    db.createCollection("wine", {
         validator: {
             $jsonSchema: {
                 bsonType: 'object',
@@ -37,13 +37,12 @@ exports.create = function () {
                     'name',
                     'year',
                     'type',
-                    'price',
-                    'country'
+                    'country',
+                    'likes'
                 ],
                 properties: {
                     name: {
                         bsonType: 'string',
-                        pattern: '([ÆØÅæøåA-Za-z0-9s\'-])+',
                         description: 'must be a string and is required'
                     },
                     year: {
@@ -64,25 +63,37 @@ exports.create = function () {
                     },
                     price: {
                         bsonType: [
-                            'double'
+                            'double',
+                            'int'
                         ],
                         description: 'must be a double if the field exists'
                     },
                     country: {
                         bsonType: 'string',
                         pattern: '[^<>;]',
-                        description: 'Must be string'
+                        description: 'Must be string not containing >, < or ;'
                     },
                     imageURL: {
                         bsonType: [
                             'string'
                         ],
-                        pattern: '[^æøåÆØÅ<>s;]',
+                        pattern: '[^æøåÆØÅ<>;]',
                         description: 'Must be string and fit URL Regex pattern if exist'
+                    },
+                    likes: {
+                        bsonType: [
+                            'int',
+                            'double'
+                        ],
+                        minimum: 0,
+                        description: 'must be a number min 0 and is required'
+                    },
+                    date: {
+                        bsonType: 'date',
+                        description: 'Must be date'
                     }
                 }
             }
-
         }
     })
 }
